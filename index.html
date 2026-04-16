@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dr. Michael Iskander | Premium Dental Care & Expert Execution</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;1,300&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* =========================================
+           CSS VARIABLES & DESIGN TOKENS
+           ========================================= */
+      :root {
+        --bg-onyx: #0a0c0b;
+        --bg-surface: #141715;
+        --brand-emerald: #0f8546;
+        --text-primary: #ffffff;
+        --text-secondary: #a0aab2;
+
+        --font-main: "Montserrat", sans-serif;
+
+        --topbar-height: 60px;
+        --nav-height: 140px;
+        --container-padding: 5%;
+        --transition-smooth: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: var(--bg-onyx);
+        color: var(--text-primary);
+        font-family: var(--font-main);
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      /* =========================================
+           TOP BAR & NAVIGATION (Preserved Perfectly)
+           ========================================= */
+      .top-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: var(--topbar-height);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 var(--container-padding);
+        background-color: var(--bg-onyx);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        z-index: 1002;
+        font-size: 0.75rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-weight: 500;
+      }
+
+      .top-bar-left,
+      .top-bar-right {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+      }
+      .top-bar-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: var(--transition-smooth);
+      }
+      .top-bar-item:hover {
+        color: var(--brand-emerald);
+      }
+      .top-bar-item svg {
+        width: 18px;
+        height: 18px;
+        stroke: currentColor;
+        stroke-width: 1.5;
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        color: var(--brand-emerald);
+      }
+      .lang-switcher .divider {
+        color: rgba(255, 255, 255, 0.2);
+        margin: 0 6px;
+      }
+      .lang-switcher span:hover {
+        color: var(--brand-emerald);
+        cursor: pointer;
+      }
+      .social-links {
+        display: flex;
+        gap: 1.2rem;
+      }
+      .social-icon {
+        display: flex;
+        transition: var(--transition-smooth);
+      }
+      .social-icon svg {
+        width: 18px;
+        height: 18px;
+        stroke: currentColor;
+        stroke-width: 1.5;
+        fill: none;
+      }
+      .social-icon:hover {
+        color: var(--brand-emerald);
+        transform: translateY(-2px);
+      }
+
+      .luxury-nav {
+        position: fixed;
+        top: var(--topbar-height);
+        left: 0;
+        width: 100%;
+        height: var(--nav-height);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 var(--container-padding);
+        z-index: 1000;
+        transition: var(--transition-smooth);
+      }
+
+      .luxury-nav.scrolled {
+        background: rgba(10, 12, 11, 0.85);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .nav-brand {
+        flex: 1;
+        display: flex;
+        margin-left: -50px;
+      }
+      .nav-logo {
+        height: 120px;
+        width: auto;
+        max-width: 25vw;
+        object-fit: contain;
+        transition: var(--transition-smooth);
+      }
+      .nav-logo:hover {
+        opacity: 0.8;
+      }
+      .nav-links {
+        flex: 2;
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        list-style: none;
+        white-space: nowrap;
+      }
+      .nav-links li a {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        position: relative;
+        padding-bottom: 5px;
+        transition: var(--transition-smooth);
+      }
+      .nav-links li a::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 1px;
+        bottom: 0;
+        left: 0;
+        background-color: var(--brand-emerald);
+        transition: var(--transition-smooth);
+      }
+      .nav-links li a:hover {
+        color: var(--brand-emerald);
+      }
+      .nav-links li a:hover::after {
+        width: 100%;
+      }
+      .nav-cta-wrapper {
+        flex: 1;
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 12px 28px;
+        font-family: var(--font-main);
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: var(--transition-smooth);
+        border-radius: 2px;
+      }
+      .btn-white {
+        background: transparent;
+        color: var(--text-primary);
+        border: 1px solid var(--text-primary);
+      }
+      .btn-white:hover {
+        background: var(--text-primary);
+        color: var(--bg-onyx);
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+      }
+
+      /* =========================================
+           HERO SECTION
+           ========================================= */
+      .hero {
+        position: relative;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        padding: 0 var(--container-padding);
+        padding-top: calc(var(--nav-height) + var(--topbar-height));
+        overflow: hidden;
+      }
+      .hero-visual {
+        position: absolute;
+        right: 0;
+        top: 0;
+        margin-top: 70px;
+        margin-right: 5px;
+        width: 45vw;
+        height: 100vh;
+        z-index: 1;
+        opacity: 0;
+        animation: cinematicReveal 2s ease-in-out forwards;
+        mask-image: linear-gradient(to right, transparent 0%, black 25%);
+        -webkit-mask-image: linear-gradient(
+          to right,
+          transparent 0%,
+          black 25%
+        );
+      }
+      .hero-visual img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: right 15%;
+        animation: slowZoom 15s ease-out forwards;
+        pointer-events: none;
+      }
+      .hero-visual::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          to right,
+          var(--bg-onyx) 0%,
+          transparent 50%
+        );
+        z-index: 2;
+      }
+      .hero-visual::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 30%;
+        background: linear-gradient(
+          to top,
+          var(--bg-onyx) 0%,
+          transparent 100%
+        );
+        z-index: 2;
+      }
+      .hero-accent-line {
+        position: absolute;
+        left: var(--container-padding);
+        top: 25%;
+        width: 1px;
+        background: linear-gradient(
+          to bottom,
+          transparent,
+          #ffffff,
+          var(--brand-emerald),
+          transparent
+        );
+        z-index: 3;
+        animation: growLine 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards 0.8s;
+        height: 0;
+        opacity: 0;
+      }
+      .hero-content {
+        position: relative;
+        max-width: 650px;
+        padding-left: 3rem;
+        z-index: 4;
+      }
+      .hero-kicker {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 5px;
+        color: var(--brand-emerald);
+        margin-bottom: 1.5rem;
+        display: block;
+        font-weight: 500;
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 0.1s;
+      }
+      .hero-title {
+        font-size: 4.2rem;
+        line-height: 1.15;
+        font-weight: 200;
+        letter-spacing: 1px;
+        margin-bottom: 2rem;
+      }
+      .hero-title strong {
+        font-weight: 500;
+      }
+
+      .word-wrap {
+        display: inline-block;
+        overflow: hidden;
+        vertical-align: bottom;
+        padding-bottom: 0.1em;
+        margin-bottom: -0.1em;
+      }
+      .word {
+        display: inline-block;
+        transform: translateY(110%);
+        opacity: 0;
+      }
+      .hero-title .word {
+        animation: cascadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+      }
+      .w-1 {
+        animation-delay: 0.1s;
+      }
+      .w-2 {
+        animation-delay: 0.2s;
+      }
+      .w-3 {
+        animation-delay: 0.3s;
+      }
+      .w-4 {
+        animation-delay: 0.4s;
+      }
+      .w-5 {
+        animation-delay: 0.5s;
+      }
+      .reveal-cascade.is-visible .word {
+        animation: cascadeUp 1.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+      }
+      .sw-1 {
+        animation-delay: 0.1s;
+      }
+      .sw-2 {
+        animation-delay: 0.5s;
+      }
+      .sw-3 {
+        animation-delay: 0.9s;
+      }
+
+      .emerald-dot {
+        color: var(--brand-emerald);
+        display: inline-block;
+        opacity: 0;
+        transform: scale(0);
+        animation: dotPop 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 0.9s;
+      }
+
+      .hero-description {
+        font-size: 1.2rem;
+        line-height: 1.6;
+        font-weight: 300;
+        color: var(--text-secondary);
+        margin-bottom: 3.5rem;
+        max-width: 550px;
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 0.9s;
+      }
+      .hero-description strong {
+        color: var(--text-primary);
+        font-weight: 500;
+      }
+      .hero-actions {
+        display: flex;
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 1.1s;
+      }
+
+      /* =========================================
+           SCROLL REVEAL UTILITIES
+           ========================================= */
+      .reveal-up {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 1.2s cubic-bezier(0.2, 0.8, 0.2, 1),
+          transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+      .reveal-up.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .delay-0 {
+        transition-delay: 0s;
+      }
+      .delay-1 {
+        transition-delay: 0.15s;
+      }
+      .delay-2 {
+        transition-delay: 0.3s;
+      }
+      .delay-3 {
+        transition-delay: 0.45s;
+      }
+      .delay-4 {
+        transition-delay: 0.6s;
+      }
+
+      @keyframes cascadeUp {
+        0% {
+          transform: translateY(110%);
+          opacity: 0;
+        }
+        100% {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+      @keyframes dotPop {
+        0% {
+          transform: scale(0);
+          opacity: 0;
+        }
+        60% {
+          transform: scale(1.2);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+      @keyframes fadeUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes growLine {
+        to {
+          height: 50%;
+          opacity: 0.6;
+        }
+      }
+      @keyframes cinematicReveal {
+        0% {
+          opacity: 0;
+          filter: brightness(0);
+        }
+        100% {
+          opacity: 1;
+          filter: brightness(1);
+        }
+      }
+      @keyframes slowZoom {
+        0% {
+          transform: scale(1);
+        }
+        100% {
+          transform: scale(1.03);
+        }
+      }
+
+      /* =========================================
+           TEAM SECTION
+           ========================================= */
+      .team-section {
+        padding: 8rem var(--container-padding);
+        background-color: var(--bg-surface);
+      }
+      .section-header {
+        text-align: center;
+        margin-bottom: 5rem;
+      }
+      .section-kicker {
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 4px;
+        color: var(--brand-emerald);
+        margin-bottom: 1rem;
+        display: block;
+        font-weight: 500;
+      }
+      .section-title {
+        font-size: 3.2rem;
+        font-weight: 300;
+        letter-spacing: 1px;
+      }
+      .team-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 2.5rem;
+      }
+      .team-card {
+        position: relative;
+        width: calc(30% - 1.5rem);
+        min-width: 280px;
+        max-width: 350px;
+        height: 450px;
+        overflow: hidden;
+        border-radius: 4px;
+        cursor: pointer;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      .president-card {
+        width: calc(38% - 1.5rem);
+        min-width: 320px;
+        max-width: 440px;
+        height: 540px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+        z-index: 2;
+      }
+      .order-1 {
+        order: 1;
+      }
+      .order-2 {
+        order: 2;
+      }
+      .order-3 {
+        order: 3;
+      }
+      .order-4 {
+        order: 4;
+      }
+      .order-5 {
+        order: 5;
+      }
+
+      .team-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: var(--transition-smooth);
+        filter: grayscale(40%) brightness(0.8);
+        pointer-events: none;
+      }
+      .card-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          to top,
+          var(--bg-onyx) 0%,
+          rgba(10, 12, 11, 0.6) 40%,
+          transparent 100%
+        );
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 2.5rem 2rem;
+        transition: var(--transition-smooth);
+      }
+      .doc-name {
+        font-size: 1.6rem;
+        font-weight: 400;
+        margin-bottom: 0.3rem;
+        letter-spacing: 0.5px;
+      }
+      .doc-title {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: var(--text-secondary);
+        font-weight: 500;
+        margin-bottom: 0;
+        transition: margin 0.5s ease;
+      }
+
+      .hover-indicator {
+        position: absolute;
+        bottom: 2.5rem;
+        right: 2rem;
+        width: 20px;
+        height: 20px;
+        color: var(--brand-emerald);
+        animation: breatheUp 2s infinite ease-in-out;
+        transition: var(--transition-smooth);
+        opacity: 0.8;
+        pointer-events: none;
+      }
+      .hover-indicator svg {
+        width: 100%;
+        height: 100%;
+        stroke: currentColor;
+        stroke-width: 2;
+        fill: none;
+      }
+      @keyframes breatheUp {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-6px);
+        }
+      }
+
+      .doc-details {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+      .doc-details-inner {
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(10px);
+        transition: all 0.5s ease;
+      }
+      .doc-desc {
+        font-size: 0.85rem;
+        line-height: 1.7;
+        font-weight: 300;
+        color: var(--text-secondary);
+        margin-top: 1.2rem;
+        margin-bottom: 1.5rem;
+      }
+      .explore-btn {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: var(--brand-emerald);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 500;
+      }
+      .explore-btn::after {
+        content: "→";
+        font-size: 1.2rem;
+        transition: transform 0.3s ease;
+      }
+
+      .team-card:hover img {
+        transform: scale(1.08);
+        filter: grayscale(0%) brightness(1);
+      }
+      .team-card:hover .card-overlay {
+        background: linear-gradient(
+          to top,
+          rgba(10, 12, 11, 0.95) 0%,
+          rgba(10, 12, 11, 0.8) 60%,
+          transparent 100%
+        );
+      }
+      .team-card:hover .doc-title {
+        margin-bottom: 0.5rem;
+        color: #ffffff;
+      }
+      .team-card:hover .doc-details {
+        grid-template-rows: 1fr;
+      }
+      .team-card:hover .doc-details-inner {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .team-card:hover .hover-indicator {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      .team-card:hover .explore-btn::after {
+        transform: translateX(5px);
+      }
+
+      /* =========================================
+           THE DENTAL GALLERY (MUSEUM LAYOUTS)
+           ========================================= */
+      .gallery-section {
+        padding: 8rem var(--container-padding);
+        background-color: var(--bg-onyx);
+        position: relative;
+      }
+
+      .gallery-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 10rem; /* Massive spacing between layouts for museum feel */
+        margin-top: 4rem;
+      }
+
+      /* Reusable Context Label */
+      .case-label {
+        position: absolute;
+        padding: 6px 16px;
+        background: rgba(10, 12, 11, 0.6);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: var(--text-primary);
+        font-size: 0.65rem;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        border-radius: 2px;
+        z-index: 5;
+        pointer-events: none;
+      }
+
+      .hover-cue-text {
+        position: absolute;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 0.7rem;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: var(--text-primary);
+        background: rgba(10, 12, 11, 0.7);
+        padding: 10px 20px;
+        border-radius: 30px;
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        z-index: 6;
+        opacity: 0.8;
+        pointer-events: none;
+        transition: var(--transition-smooth);
+      }
+
+      /* --- TYPE 1: Cinematic Interactive Slider (Fixed Drag) --- */
+      .comparison-slider {
+        position: relative;
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        aspect-ratio: 16/9;
+        border-radius: 4px;
+        overflow: hidden;
+        cursor: ew-resize;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        /* BUG FIX: Stops mobile scrolling and text selection while dragging */
+        touch-action: none;
+        user-select: none;
+        -webkit-user-select: none;
+      }
+      .comp-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        /* BUG FIX: Stops browser from "grabbing" the image file */
+        pointer-events: none;
+        -webkit-user-drag: none;
+      }
+      .after-img {
+        z-index: 1;
+      }
+      .before-img {
+        z-index: 2;
+        clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+        -webkit-clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+      }
+      .slider-handle {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        width: 1px;
+        background-color: var(--text-primary);
+        z-index: 3;
+        transform: translateX(-50%);
+        pointer-events: none;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+      }
+      .slider-button {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: rgba(10, 12, 11, 0.5);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2px;
+        color: var(--text-primary);
+        transition: var(--transition-smooth);
+        pointer-events: none; /* Let clicks pass to parent */
+      }
+      .comparison-slider:hover .slider-button {
+        border-color: var(--brand-emerald);
+        color: var(--brand-emerald);
+        background-color: rgba(10, 12, 11, 0.8);
+        transform: translate(-50%, -50%) scale(1.1);
+      }
+      .slider-button svg {
+        width: 16px;
+        height: 16px;
+        stroke: currentColor;
+        stroke-width: 1.5;
+        fill: none;
+      }
+      .label-before {
+        left: 2rem;
+        bottom: 2rem;
+      }
+      .label-after {
+        right: 2rem;
+        bottom: 2rem;
+      }
+
+      /* --- TYPE 2: The Soft-Dissolve Grid (Case 3/4 & 5/6) --- */
+      .dissolve-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+      }
+      .dissolve-card {
+        position: relative;
+        aspect-ratio: 4/3;
+        overflow: hidden;
+        border-radius: 4px;
+        cursor: pointer;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      .dissolve-card img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        pointer-events: none;
+        transition: opacity 0.8s ease, transform 1s ease;
+      }
+      .dissolve-before {
+        z-index: 1;
+        filter: grayscale(100%) contrast(1.2);
+      }
+      .dissolve-after {
+        z-index: 2;
+        opacity: 0;
+      }
+
+      .dissolve-card:hover .dissolve-after {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+      .dissolve-card:hover .dissolve-before {
+        transform: scale(1.05);
+      }
+      .dissolve-card:hover .hover-cue-text {
+        opacity: 0;
+        transform: translate(-50%, 10px);
+      }
+      .dissolve-card .label-before {
+        top: 1.5rem;
+        left: 1.5rem;
+        bottom: auto;
+        transition: 0.5s;
+      }
+      .dissolve-card:hover .label-before {
+        opacity: 0;
+      }
+
+      /* --- TYPE 3: The Spotlight Reveal Mask (Case 7/8 & 9/10) --- */
+      .spotlight-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+      }
+      .spotlight-card {
+        position: relative;
+        aspect-ratio: 16/9;
+        overflow: hidden;
+        border-radius: 4px;
+        cursor: crosshair;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      }
+      .spotlight-card img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        pointer-events: none;
+      }
+      .spotlight-before {
+        z-index: 1;
+      }
+      .spotlight-after {
+        z-index: 2;
+        clip-path: circle(0% at 50% 50%);
+        -webkit-clip-path: circle(0% at 50% 50%);
+        transition: clip-path 0.8s cubic-bezier(0.25, 1, 0.5, 1),
+          -webkit-clip-path 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+      }
+      .spotlight-card:hover .spotlight-after {
+        clip-path: circle(120% at 50% 50%);
+        -webkit-clip-path: circle(120% at 50% 50%);
+      }
+      .spotlight-card:hover .hover-cue-text {
+        opacity: 0;
+        transform: translate(-50%, 10px);
+      }
+      .spotlight-card .label-before {
+        top: 1.5rem;
+        left: 1.5rem;
+        bottom: auto;
+      }
+
+      /* --- TYPE 4: The Editorial Vogue Spread (Cases 30/31 & 34/35) --- */
+      .editorial-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 4rem;
+        margin-bottom: 8rem;
+      }
+      .editorial-row.reverse {
+        flex-direction: row-reverse;
+      }
+      .editorial-text {
+        flex: 1;
+        max-width: 400px;
+      }
+      .ed-kicker {
+        font-size: 0.75rem;
+        letter-spacing: 4px;
+        color: var(--brand-emerald);
+        text-transform: uppercase;
+        display: block;
+        margin-bottom: 1rem;
+      }
+      .ed-title {
+        font-size: 2.4rem;
+        font-weight: 300;
+        margin-bottom: 1.5rem;
+        line-height: 1.2;
+      }
+      .ed-desc {
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+        line-height: 1.8;
+        font-weight: 300;
+      }
+
+      .editorial-images {
+        flex: 1.5;
+        position: relative;
+        aspect-ratio: 4/3;
+        cursor: pointer;
+      }
+      .editorial-images img {
+        position: absolute;
+        border-radius: 2px;
+        transition: var(--transition-smooth);
+        pointer-events: none;
+        object-fit: cover;
+      }
+
+      .ed-before {
+        width: 70%;
+        height: 80%;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        filter: grayscale(100%) opacity(0.6);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .ed-after {
+        width: 75%;
+        height: 85%;
+        bottom: 0;
+        right: 0;
+        z-index: 2;
+        box-shadow: -20px -20px 50px rgba(0, 0, 0, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .editorial-row.reverse .ed-before {
+        left: auto;
+        right: 0;
+      }
+      .editorial-row.reverse .ed-after {
+        right: auto;
+        left: 0;
+        box-shadow: 20px -20px 50px rgba(0, 0, 0, 0.6);
+      }
+
+      .editorial-images:hover .ed-before {
+        filter: grayscale(0%) opacity(1);
+        transform: scale(0.95);
+        z-index: 3;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+      }
+      .editorial-images:hover .ed-after {
+        transform: scale(1.05) translateY(-10px);
+        z-index: 2;
+        opacity: 0.4;
+      }
+
+      @media (max-width: 1024px) {
+        .dissolve-grid,
+        .spotlight-grid {
+          grid-template-columns: 1fr;
+        }
+        .editorial-row,
+        .editorial-row.reverse {
+          flex-direction: column;
+          gap: 2rem;
+          margin-bottom: 5rem;
+        }
+        .editorial-text {
+          max-width: 100%;
+          text-align: center;
+        }
+        .editorial-images {
+          width: 100%;
+        }
+      }
+      @media (max-width: 768px) {
+        .comparison-slider {
+          aspect-ratio: 4/3;
+        }
+        .case-label {
+          font-size: 0.55rem;
+          padding: 4px 10px;
+        }
+        .ed-before {
+          width: 80%;
+          height: 90%;
+        }
+        .ed-after {
+          width: 80%;
+          height: 90%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <a href="#" class="top-bar-item">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M12 21c-4.418-6.136-7.5-10.377-7.5-13.5A7.5 7.5 0 0 1 12 3a7.5 7.5 0 0 1 7.5 4.5c0 3.123-3.082 7.364-7.5 13.5Z"
+            />
+            <circle cx="12" cy="7.5" r="2.5" />
+          </svg>
+          <span>Dental Gallery, Cairo, EG</span>
+        </a>
+      </div>
+      <div class="top-bar-right">
+        <div class="lang-switcher top-bar-item">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" />
+            <path
+              d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+            />
+            <path d="M2 12h20" />
+          </svg>
+          <span>EN</span><span class="divider">|</span><span>عربي</span>
+        </div>
+        <div class="social-links">
+          <a
+            href="https://www.facebook.com/miskanderclinic"
+            target="_blank"
+            class="social-icon"
+            ><svg viewBox="0 0 24 24">
+              <path
+                d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+              /></svg
+          ></a>
+          <a
+            href="https://www.instagram.com/miskanderclinic?igsh=MWoza3ZoNHJqZXhjYw=="
+            target="_blank"
+            class="social-icon"
+            ><svg viewBox="0 0 24 24">
+              <rect width="16" height="16" x="4" y="4" rx="4" />
+              <circle cx="12" cy="12" r="3" />
+              <line x1="16.5" x2="16.5" y1="7.5" y2="7.5" /></svg
+          ></a>
+        </div>
+      </div>
+    </div>
+
+    <nav class="luxury-nav" id="mainNav">
+      <div class="nav-brand">
+        <a href="/"
+          ><img src="images-logo/1.png" alt="Logo" class="nav-logo"
+        /></a>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#expertise">Expertise</a></li>
+        <li><a href="#dental-gallery">Dental Gallery</a></li>
+        <li><a href="#academics">Academics</a></li>
+        <li><a href="#clinic">The Clinic</a></li>
+      </ul>
+      <div class="nav-cta-wrapper">
+        <a href="#contact" class="btn btn-white">Book Private Consultation</a>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <div class="hero-visual">
+        <img src="images-iskandar-hero/1.png" alt="Dr. Michael Iskander" />
+      </div>
+      <div class="hero-accent-line"></div>
+      <div class="hero-content">
+        <span class="hero-kicker">Cairo's Premium Dental Destination</span>
+        <h1 class="hero-title">
+          <span class="word-wrap"><span class="word w-1">A</span></span>
+          <span class="word-wrap"
+            ><span class="word w-2">Masterclass</span></span
+          >
+          <span class="word-wrap"><span class="word w-3">in</span></span
+          ><br />
+          <strong>
+            <span class="word-wrap"
+              ><span class="word w-4">Restorative</span></span
+            >
+            <span class="word-wrap"><span class="word w-5">Care</span></span
+            ><span class="emerald-dot">.</span>
+          </strong>
+        </h1>
+        <p class="hero-description">
+          True aesthetic perfection requires a
+          <strong>symphony of specialists</strong>. Under the visionary
+          leadership of <strong>Dr. Michael Iskander</strong>, our
+          multi-disciplinary team engineers flawless, enduring smiles for our
+          most discerning patients.
+        </p>
+        <div class="hero-actions">
+          <a href="#consultation" class="btn btn-white">Schedule Assessment</a>
+        </div>
+      </div>
+    </header>
+
+    <section id="expertise" class="team-section">
+      <div class="section-header">
+        <span class="section-kicker reveal-up delay-0"
+          >The Dental Gallery Institute</span
+        >
+        <h2 class="section-title reveal-cascade">
+          <span class="word-wrap"><span class="word sw-1">Meet</span></span>
+          <span class="word-wrap"><span class="word sw-2">Our</span></span>
+          <span class="word-wrap"><span class="word sw-3">Experts</span></span>
+        </h2>
+      </div>
+      <div class="team-grid">
+        <div class="team-card order-1 reveal-up delay-2">
+          <img src="images-team/3.JPG" alt="Dr. Abdullah Farouk Radwan" />
+          <div class="card-overlay">
+            <h3 class="doc-name">Dr. Abdullah Radwan</h3>
+            <p class="doc-title">Consultant of Cosmetic Dentistry</p>
+            <div class="hover-indicator">
+              <svg viewBox="0 0 24 24"><path d="M18 15l-6-6-6 6" /></svg>
+            </div>
+            <div class="doc-details">
+              <div class="doc-details-inner">
+                <p class="doc-desc">
+                  Specializing in high-end smile makeovers and minimally
+                  invasive veneers.
+                </p>
+                <span class="explore-btn">View Credentials</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="team-card president-card order-2 reveal-up delay-1">
+          <img src="images-team/2.JPG" alt="Dr. Michael Iskander" />
+          <div class="card-overlay">
+            <h3 class="doc-name">Dr. Michael Iskander</h3>
+            <p class="doc-title">Implantology & Periodontics</p>
+            <div class="hover-indicator">
+              <svg viewBox="0 0 24 24"><path d="M18 15l-6-6-6 6" /></svg>
+            </div>
+            <div class="doc-details">
+              <div class="doc-details-inner">
+                <p class="doc-desc">
+                  A master of complex implantology and periodontal microsurgery.
+                </p>
+                <span class="explore-btn">View Credentials</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="team-card order-3 reveal-up delay-3">
+          <img src="images-team/4.JPG" alt="Dr. Dina Shahin" />
+          <div class="card-overlay">
+            <h3 class="doc-name">Dr. Dina Shahin</h3>
+            <p class="doc-title">Prosthodontist</p>
+            <div class="hover-indicator">
+              <svg viewBox="0 0 24 24"><path d="M18 15l-6-6-6 6" /></svg>
+            </div>
+            <div class="doc-details">
+              <div class="doc-details-inner">
+                <p class="doc-desc">
+                  An expert in full-mouth rehabilitation and complex
+                  prosthetics.
+                </p>
+                <span class="explore-btn">View Credentials</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="team-card order-4 reveal-up delay-3">
+          <img src="images-team/5.JPG" alt="Dr. Aya Hamadto" />
+          <div class="card-overlay">
+            <h3 class="doc-name">Dr. Aya Hamadto</h3>
+            <p class="doc-title">Restorative Dentist</p>
+            <div class="hover-indicator">
+              <svg viewBox="0 0 24 24"><path d="M18 15l-6-6-6 6" /></svg>
+            </div>
+            <div class="doc-details">
+              <div class="doc-details-inner">
+                <p class="doc-desc">
+                  Dedicated to biomimetic dentistry and preserving natural tooth
+                  structure.
+                </p>
+                <span class="explore-btn">View Credentials</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="team-card order-5 reveal-up delay-4">
+          <img src="images-team/6.JPG" alt="Dr. Morad Morres" />
+          <div class="card-overlay">
+            <h3 class="doc-name">Dr. Morad Morres</h3>
+            <p class="doc-title">Restorative Dentist</p>
+            <div class="hover-indicator">
+              <svg viewBox="0 0 24 24"><path d="M18 15l-6-6-6 6" /></svg>
+            </div>
+            <div class="doc-details">
+              <div class="doc-details-inner">
+                <p class="doc-desc">
+                  Meticulous detail in precision-driven restorative treatments.
+                </p>
+                <span class="explore-btn">View Credentials</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="dental-gallery" class="gallery-section">
+      <div class="section-header">
+        <span class="section-kicker reveal-up delay-0"
+          >Signature Transformations</span
+        >
+        <h2 class="section-title reveal-cascade">
+          <span class="word-wrap"><span class="word sw-1">The</span></span>
+          <span class="word-wrap"><span class="word sw-2">Lookbook</span></span>
+        </h2>
+      </div>
+
+      <div class="gallery-wrapper">
+        <div class="comparison-slider reveal-up delay-2" id="compare-slider">
+          <img
+            src="Images-Patients/2.webp"
+            alt="After"
+            class="comp-img after-img"
+          />
+          <img
+            src="Images-Patients/1.webp"
+            alt="Before"
+            class="comp-img before-img"
+          />
+
+          <div class="slider-handle" id="slider-handle">
+            <div class="slider-button">
+              <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6" /></svg>
+              <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" /></svg>
+            </div>
+          </div>
+
+          <span class="case-label label-before">Before</span>
+          <span class="case-label label-after">After</span>
+          <div class="hover-cue-text">[ DRAG TO COMPARE ]</div>
+        </div>
+
+        <div class="dissolve-grid reveal-up delay-1">
+          <div class="dissolve-card">
+            <img
+              src="Images-Patients/3.webp"
+              alt="Before"
+              class="dissolve-before"
+            />
+            <img
+              src="Images-Patients/4.webp"
+              alt="After"
+              class="dissolve-after"
+            />
+            <span class="case-label label-before">Case 02</span>
+            <div class="hover-cue-text">[ HOVER TO REVEAL ]</div>
+          </div>
+          <div class="dissolve-card">
+            <img
+              src="Images-Patients/5.webp"
+              alt="Before"
+              class="dissolve-before"
+            />
+            <img
+              src="Images-Patients/6.webp"
+              alt="After"
+              class="dissolve-after"
+            />
+            <span class="case-label label-before">Case 03</span>
+            <div class="hover-cue-text">[ HOVER TO REVEAL ]</div>
+          </div>
+        </div>
+
+        <div class="spotlight-grid reveal-up delay-1">
+          <div class="spotlight-card">
+            <img
+              src="Images-Patients/7.webp"
+              alt="Before"
+              class="spotlight-before"
+            />
+            <img
+              src="Images-Patients/8.webp"
+              alt="After"
+              class="spotlight-after"
+            />
+            <span class="case-label label-before">Case 04</span>
+            <div class="hover-cue-text">[ SPOTLIGHT REVEAL ]</div>
+          </div>
+          <div class="spotlight-card">
+            <img
+              src="Images-Patients/9.webp"
+              alt="Before"
+              class="spotlight-before"
+            />
+            <img
+              src="Images-Patients/10.webp"
+              alt="After"
+              class="spotlight-after"
+            />
+            <span class="case-label label-before">Case 05</span>
+            <div class="hover-cue-text">[ SPOTLIGHT REVEAL ]</div>
+          </div>
+        </div>
+
+        <div class="editorial-row reveal-up delay-1">
+          <div class="editorial-text">
+            <span class="ed-kicker">Case Study 06</span>
+            <h3 class="ed-title">Architectural Harmony.</h3>
+            <p class="ed-desc">
+              A complete structural redesign. By utilizing ultra-thin ceramic
+              restorations, we achieved a flawless, natural symmetry that
+              respects the underlying biology of the smile.
+            </p>
+          </div>
+          <div class="editorial-images">
+            <img src="Images-Patients/30.webp" alt="Before" class="ed-before" />
+            <img src="Images-Patients/31.webp" alt="After" class="ed-after" />
+          </div>
+        </div>
+
+        <div class="editorial-row reverse reveal-up delay-1">
+          <div class="editorial-text">
+            <span class="ed-kicker">Case Study 07</span>
+            <h3 class="ed-title">Luminescent Vitality.</h3>
+            <p class="ed-desc">
+              Correcting severe discoloration and foundational wear. Through
+              precise color-matching and contouring, the result is a vibrant,
+              youthful aesthetic that feels entirely authentic.
+            </p>
+          </div>
+          <div class="editorial-images">
+            <img src="Images-Patients/34.webp" alt="Before" class="ed-before" />
+            <img src="Images-Patients/35.webp" alt="After" class="ed-after" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        /* --- 1. Sticky Nav Logic --- */
+        const nav = document.getElementById("mainNav");
+        window.addEventListener("scroll", () => {
+          if (window.scrollY > 50) {
+            nav.classList.add("scrolled");
+          } else {
+            nav.classList.remove("scrolled");
+          }
+        });
+
+        /* --- 2. Scroll Reveal Observer --- */
+        const observerOptions = {
+          root: null,
+          rootMargin: "0px 0px -15% 0px",
+          threshold: 0,
+        };
+        const observer = new IntersectionObserver((entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        }, observerOptions);
+        document
+          .querySelectorAll(".reveal-up, .reveal-cascade")
+          .forEach((element) => {
+            observer.observe(element);
+          });
+
+        /* --- 3. Interactive Drag-to-Reveal (Bug Fixed) --- */
+        const slider = document.getElementById("compare-slider");
+        if (slider) {
+          const handle = document.getElementById("slider-handle");
+          const beforeImg = slider.querySelector(".before-img");
+          const cueText = slider.querySelector(".hover-cue-text");
+          let isDragging = false;
+
+          const moveSlider = (e) => {
+            if (!isDragging) return;
+
+            const rect = slider.getBoundingClientRect();
+            let x = e.clientX - rect.left;
+            if (e.type.includes("touch")) x = e.touches[0].clientX - rect.left;
+
+            x = Math.max(0, Math.min(x, rect.width));
+            const percentage = (x / rect.width) * 100;
+
+            handle.style.left = `${percentage}%`;
+            beforeImg.style.clipPath = `polygon(0 0, ${percentage}% 0, ${percentage}% 100%, 0 100%)`;
+            beforeImg.style.webkitClipPath = `polygon(0 0, ${percentage}% 0, ${percentage}% 100%, 0 100%)`;
+          };
+
+          // Desktop
+          slider.addEventListener("mousedown", () => {
+            isDragging = true;
+            cueText.style.opacity = 0;
+          });
+          window.addEventListener("mouseup", () => (isDragging = false));
+          window.addEventListener("mousemove", moveSlider);
+
+          // Mobile
+          slider.addEventListener(
+            "touchstart",
+            () => {
+              isDragging = true;
+              cueText.style.opacity = 0;
+            },
+            { passive: true }
+          );
+          window.addEventListener("touchend", () => (isDragging = false));
+          window.addEventListener("touchmove", moveSlider, { passive: true });
+        }
+      });
+    </script>
+  </body>
+</html>
