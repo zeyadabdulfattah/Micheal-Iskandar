@@ -19,14 +19,15 @@
       :root {
         --bg-onyx: #0a0c0b;
         --bg-surface: #141715;
+        --bg-charcoal: #111312;
         --brand-emerald: #0f8546;
         --text-primary: #ffffff;
         --text-secondary: #a0aab2;
 
         --font-main: "Montserrat", sans-serif;
 
-        --topbar-height: 60px;
-        --nav-height: 140px;
+        --topbar-height: 50px;
+        --nav-height: 120px;
         --container-padding: 5%;
         --transition-smooth: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       }
@@ -37,12 +38,15 @@
         box-sizing: border-box;
       }
 
+      html,
       body {
         background-color: var(--bg-onyx);
         color: var(--text-primary);
         font-family: var(--font-main);
         -webkit-font-smoothing: antialiased;
+        /* CRITICAL: Prevents horizontal scrolling glitches */
         overflow-x: hidden;
+        width: 100%;
       }
 
       a {
@@ -51,7 +55,60 @@
       }
 
       /* =========================================
-           TOP BAR & NAVIGATION (Preserved Perfectly)
+           GLOBAL BUTTONS & CTA WRAPPERS
+           ========================================= */
+      .global-cta-wrapper {
+        display: flex;
+        justify-content: center;
+        margin-top: 4rem;
+        width: 100%;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 12px 28px;
+        font-family: var(--font-main);
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: var(--transition-smooth);
+        border-radius: 2px;
+        text-align: center;
+        white-space: nowrap;
+      }
+      .btn svg {
+        width: 16px;
+        height: 16px;
+        fill: currentColor;
+      }
+      .btn-white {
+        background: transparent;
+        color: var(--text-primary);
+        border: 1px solid var(--text-primary);
+      }
+      .btn-white:hover {
+        background: var(--text-primary);
+        color: var(--bg-onyx);
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+      }
+      .btn-emerald {
+        background: var(--brand-emerald);
+        color: var(--text-primary);
+        border: 1px solid var(--brand-emerald);
+      }
+      .btn-emerald:hover {
+        background: transparent;
+        color: var(--brand-emerald);
+        box-shadow: 0 0 20px rgba(15, 133, 70, 0.4);
+      }
+
+      /* =========================================
+           TOP BAR
            ========================================= */
       .top-bar {
         position: fixed;
@@ -66,7 +123,7 @@
         background-color: var(--bg-onyx);
         border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         z-index: 1002;
-        font-size: 0.75rem;
+        font-size: 0.7rem;
         letter-spacing: 2px;
         text-transform: uppercase;
         font-weight: 500;
@@ -88,13 +145,11 @@
         color: var(--brand-emerald);
       }
       .top-bar-item svg {
-        width: 18px;
-        height: 18px;
+        width: 16px;
+        height: 16px;
         stroke: currentColor;
         stroke-width: 1.5;
         fill: none;
-        stroke-linecap: round;
-        stroke-linejoin: round;
         color: var(--brand-emerald);
       }
       .lang-switcher .divider {
@@ -114,8 +169,8 @@
         transition: var(--transition-smooth);
       }
       .social-icon svg {
-        width: 18px;
-        height: 18px;
+        width: 16px;
+        height: 16px;
         stroke: currentColor;
         stroke-width: 1.5;
         fill: none;
@@ -125,6 +180,9 @@
         transform: translateY(-2px);
       }
 
+      /* =========================================
+           REBUILT: LUXURY DESKTOP NAVIGATION
+           ========================================= */
       .luxury-nav {
         position: fixed;
         top: var(--topbar-height);
@@ -140,34 +198,43 @@
       }
 
       .luxury-nav.scrolled {
-        background: rgba(10, 12, 11, 0.85);
+        background: rgba(10, 12, 11, 0.95);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
         border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        height: 90px;
       }
 
+      /* Logo (Left) */
       .nav-brand {
-        flex: 1;
+        z-index: 1001;
         display: flex;
-        margin-left: -50px;
+        align-items: center;
       }
       .nav-logo {
-        height: 120px;
+        height: 90px;
         width: auto;
-        max-width: 25vw;
         object-fit: contain;
         transition: var(--transition-smooth);
+      }
+      .luxury-nav.scrolled .nav-logo {
+        height: 60px;
       }
       .nav-logo:hover {
         opacity: 0.8;
       }
+
+      /* Links (Perfectly Centered via Absolute Positioning) */
       .nav-links {
-        flex: 2;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
         display: flex;
-        justify-content: center;
-        gap: 2rem;
+        gap: 3rem;
         list-style: none;
         white-space: nowrap;
+        margin: 0;
+        padding: 0;
       }
       .nav-links li a {
         font-size: 0.8rem;
@@ -176,6 +243,7 @@
         position: relative;
         padding-bottom: 5px;
         transition: var(--transition-smooth);
+        color: var(--text-primary);
       }
       .nav-links li a::after {
         content: "";
@@ -193,33 +261,160 @@
       .nav-links li a:hover::after {
         width: 100%;
       }
-      .nav-cta-wrapper {
-        flex: 1;
+
+      /* Actions (Right) */
+      .nav-right {
         display: flex;
-        justify-content: flex-end;
+        align-items: center;
+        gap: 2rem;
+        z-index: 1001;
       }
 
-      .btn {
-        display: inline-block;
-        padding: 12px 28px;
-        font-family: var(--font-main);
-        font-size: 0.7rem;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: var(--transition-smooth);
-        border-radius: 2px;
-      }
-      .btn-white {
+      /* Hamburger (Hidden on Desktop) */
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 30px;
+        height: 18px;
         background: transparent;
-        color: var(--text-primary);
-        border: 1px solid var(--text-primary);
+        border: none;
+        cursor: pointer;
+        z-index: 1001;
       }
-      .btn-white:hover {
-        background: var(--text-primary);
-        color: var(--bg-onyx);
-        box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+      .hamburger .bar {
+        width: 100%;
+        height: 2px;
+        background-color: var(--text-primary);
+        transition: 0.3s ease;
+      }
+
+      /* =========================================
+           NEW: PREMIUM OFF-CANVAS MOBILE MENU
+           ========================================= */
+      .nav-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        z-index: 1050;
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.4s ease;
+        cursor: pointer;
+      }
+      .nav-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .offcanvas-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 400px;
+        max-width: 100vw;
+        height: 100vh;
+        background: var(--bg-onyx);
+        border-left: 1px solid rgba(255, 255, 255, 0.05);
+        z-index: 1051;
+        display: flex;
+        flex-direction: column;
+        padding: 2.5rem;
+        transition: 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        box-shadow: -20px 0 50px rgba(0, 0, 0, 0.7);
+        overflow-y: auto;
+      }
+      .offcanvas-menu.active {
+        right: 0;
+      }
+
+      .offcanvas-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 4rem;
+      }
+      .offcanvas-logo {
+        height: 60px;
+        object-fit: contain;
+      }
+      .close-btn {
+        background: none;
+        border: none;
+        color: var(--text-primary);
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.3s ease, color 0.3s ease;
+      }
+      .close-btn:hover {
+        color: var(--brand-emerald);
+        transform: rotate(90deg);
+      }
+      .close-btn svg {
+        width: 28px;
+        height: 28px;
+      }
+
+      .offcanvas-links {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        margin-bottom: auto;
+      }
+      .offcanvas-link {
+        font-size: 1.4rem;
+        font-weight: 300;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        color: var(--text-primary);
+        transition: 0.3s ease;
+        display: inline-block;
+      }
+      .offcanvas-link:hover {
+        color: var(--brand-emerald);
+        transform: translateX(10px);
+      }
+
+      .offcanvas-footer {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        padding-top: 3rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        margin-top: 3rem;
+      }
+      .w-100 {
+        width: 100%;
+        text-align: center;
+      }
+      .offcanvas-socials {
+        display: flex;
+        gap: 1.5rem;
+      }
+      .offcanvas-socials a {
+        color: var(--text-primary);
+        transition: 0.3s ease;
+      }
+      .offcanvas-socials a:hover {
+        color: var(--brand-emerald);
+        transform: translateY(-3px);
+      }
+      .offcanvas-socials svg {
+        width: 22px;
+        height: 22px;
+        stroke: currentColor;
+        stroke-width: 1.5;
+        fill: none;
       }
 
       /* =========================================
@@ -371,10 +566,10 @@
         animation-delay: 0.1s;
       }
       .sw-2 {
-        animation-delay: 0.5s;
+        animation-delay: 0.3s;
       }
       .sw-3 {
-        animation-delay: 0.9s;
+        animation-delay: 0.5s;
       }
 
       .emerald-dot {
@@ -384,10 +579,9 @@
         transform: scale(0);
         animation: dotPop 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 0.9s;
       }
-
       .hero-description {
-        font-size: 1.2rem;
-        line-height: 1.6;
+        font-size: 1.1rem;
+        line-height: 1.7;
         font-weight: 300;
         color: var(--text-secondary);
         margin-bottom: 3.5rem;
@@ -490,6 +684,15 @@
           transform: scale(1.03);
         }
       }
+      @keyframes pulseBounce {
+        0%,
+        100% {
+          transform: translateX(-50%) translateY(0) scale(1);
+        }
+        50% {
+          transform: translateX(-50%) translateY(-5px) scale(1.03);
+        }
+      }
 
       /* =========================================
            TEAM SECTION
@@ -523,6 +726,7 @@
         align-items: center;
         gap: 2.5rem;
       }
+
       .team-card {
         position: relative;
         width: calc(30% - 1.5rem);
@@ -697,7 +901,7 @@
       }
 
       /* =========================================
-           THE DENTAL GALLERY (MUSEUM LAYOUTS)
+           2x2 CAPABILITIES SHOWCASE (THE LOOKBOOK)
            ========================================= */
       .gallery-section {
         padding: 8rem var(--container-padding);
@@ -705,63 +909,118 @@
         position: relative;
       }
 
-      .gallery-wrapper {
+      .showcase-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 5rem 4rem;
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+      .showcase-item {
         display: flex;
         flex-direction: column;
-        gap: 10rem; /* Massive spacing between layouts for museum feel */
-        margin-top: 4rem;
       }
 
-      /* Reusable Context Label */
-      .case-label {
-        position: absolute;
-        padding: 6px 16px;
-        background: rgba(10, 12, 11, 0.6);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        color: var(--text-primary);
-        font-size: 0.65rem;
-        letter-spacing: 3px;
-        text-transform: uppercase;
-        border-radius: 2px;
-        z-index: 5;
-        pointer-events: none;
+      .interaction-frame {
+        width: 100%;
+        aspect-ratio: 4/3;
+        position: relative;
+        overflow: hidden;
+        border-radius: 4px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.05);
       }
 
       .hover-cue-text {
         position: absolute;
-        bottom: 2rem;
+        bottom: 1.5rem;
         left: 50%;
         transform: translateX(-50%);
-        font-size: 0.7rem;
-        letter-spacing: 4px;
+        font-size: 0.65rem;
+        letter-spacing: 3px;
         text-transform: uppercase;
         color: var(--text-primary);
         background: rgba(10, 12, 11, 0.7);
-        padding: 10px 20px;
+        padding: 8px 16px;
         border-radius: 30px;
         backdrop-filter: blur(5px);
         -webkit-backdrop-filter: blur(5px);
-        z-index: 6;
-        opacity: 0.8;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        z-index: 10;
         pointer-events: none;
-        transition: var(--transition-smooth);
+        transition: opacity 0.3s ease;
+        animation: pulseBounce 2.5s infinite cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .interaction-frame:hover .hover-cue-text {
+        opacity: 0;
+        animation: none;
       }
 
-      /* --- TYPE 1: Cinematic Interactive Slider (Fixed Drag) --- */
-      .comparison-slider {
+      .case-info-bar {
         position: relative;
-        width: 100%;
-        max-width: 1200px;
-        margin: 0 auto;
-        aspect-ratio: 16/9;
-        border-radius: 4px;
+        margin-top: 1.5rem;
+      }
+      .case-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding-bottom: 12px;
+      }
+      .case-header:hover .case-title {
+        color: var(--brand-emerald);
+      }
+      .case-number {
+        font-size: 0.7rem;
+        color: var(--brand-emerald);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-weight: 500;
+      }
+      .case-title {
+        font-size: 1.2rem;
+        font-weight: 300;
+        color: var(--text-primary);
+        flex: 1;
+        margin-left: 1.5rem;
+        transition: 0.3s;
+      }
+      .details-btn {
+        background: none;
+        border: none;
+        color: var(--text-primary);
+        font-size: 1.8rem;
+        font-weight: 200;
+        cursor: pointer;
+        transition: transform 0.4s ease, color 0.4s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .case-details-panel {
+        max-height: 0;
         overflow: hidden;
+        transition: max-height 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+      }
+      .case-info-bar.open .case-details-panel {
+        max-height: 250px;
+      }
+      .case-info-bar.open .details-btn {
+        transform: rotate(45deg);
+        color: var(--brand-emerald);
+      }
+      .case-details-panel p {
+        padding-top: 1.2rem;
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        line-height: 1.7;
+        font-weight: 300;
+      }
+
+      /* Interactivity Classes */
+      .comparison-slider {
         cursor: ew-resize;
-        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        /* BUG FIX: Stops mobile scrolling and text selection while dragging */
         touch-action: none;
         user-select: none;
         -webkit-user-select: none;
@@ -773,7 +1032,6 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
-        /* BUG FIX: Stops browser from "grabbing" the image file */
         pointer-events: none;
         -webkit-user-drag: none;
       }
@@ -802,20 +1060,18 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 50px;
-        height: 50px;
+        width: 45px;
+        height: 45px;
         border-radius: 50%;
         background-color: rgba(10, 12, 11, 0.5);
         backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
         border: 1px solid rgba(255, 255, 255, 0.2);
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 2px;
         color: var(--text-primary);
         transition: var(--transition-smooth);
-        pointer-events: none; /* Let clicks pass to parent */
+        pointer-events: none;
       }
       .comparison-slider:hover .slider-button {
         border-color: var(--brand-emerald);
@@ -824,89 +1080,15 @@
         transform: translate(-50%, -50%) scale(1.1);
       }
       .slider-button svg {
-        width: 16px;
-        height: 16px;
+        width: 14px;
+        height: 14px;
         stroke: currentColor;
         stroke-width: 1.5;
         fill: none;
       }
-      .label-before {
-        left: 2rem;
-        bottom: 2rem;
-      }
-      .label-after {
-        right: 2rem;
-        bottom: 2rem;
-      }
 
-      /* --- TYPE 2: The Soft-Dissolve Grid (Case 3/4 & 5/6) --- */
-      .dissolve-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 2rem;
-      }
-      .dissolve-card {
-        position: relative;
-        aspect-ratio: 4/3;
-        overflow: hidden;
-        border-radius: 4px;
-        cursor: pointer;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-        border: 1px solid rgba(255, 255, 255, 0.05);
-      }
-      .dissolve-card img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        pointer-events: none;
-        transition: opacity 0.8s ease, transform 1s ease;
-      }
-      .dissolve-before {
-        z-index: 1;
-        filter: grayscale(100%) contrast(1.2);
-      }
-      .dissolve-after {
-        z-index: 2;
-        opacity: 0;
-      }
-
-      .dissolve-card:hover .dissolve-after {
-        opacity: 1;
-        transform: scale(1.05);
-      }
-      .dissolve-card:hover .dissolve-before {
-        transform: scale(1.05);
-      }
-      .dissolve-card:hover .hover-cue-text {
-        opacity: 0;
-        transform: translate(-50%, 10px);
-      }
-      .dissolve-card .label-before {
-        top: 1.5rem;
-        left: 1.5rem;
-        bottom: auto;
-        transition: 0.5s;
-      }
-      .dissolve-card:hover .label-before {
-        opacity: 0;
-      }
-
-      /* --- TYPE 3: The Spotlight Reveal Mask (Case 7/8 & 9/10) --- */
-      .spotlight-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 2rem;
-      }
       .spotlight-card {
-        position: relative;
-        aspect-ratio: 16/9;
-        overflow: hidden;
-        border-radius: 4px;
         cursor: crosshair;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
       }
       .spotlight-card img {
         position: absolute;
@@ -928,72 +1110,58 @@
           -webkit-clip-path 0.8s cubic-bezier(0.25, 1, 0.5, 1);
       }
       .spotlight-card:hover .spotlight-after {
-        clip-path: circle(120% at 50% 50%);
-        -webkit-clip-path: circle(120% at 50% 50%);
-      }
-      .spotlight-card:hover .hover-cue-text {
-        opacity: 0;
-        transform: translate(-50%, 10px);
-      }
-      .spotlight-card .label-before {
-        top: 1.5rem;
-        left: 1.5rem;
-        bottom: auto;
+        clip-path: circle(120% at var(--mouse-x, 50%) var(--mouse-y, 50%));
+        -webkit-clip-path: circle(
+          120% at var(--mouse-x, 50%) var(--mouse-y, 50%)
+        );
       }
 
-      /* --- TYPE 4: The Editorial Vogue Spread (Cases 30/31 & 34/35) --- */
-      .editorial-row {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 4rem;
-        margin-bottom: 8rem;
+      .dissolve-card {
+        cursor: pointer;
       }
-      .editorial-row.reverse {
-        flex-direction: row-reverse;
+      .dissolve-card img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        pointer-events: none;
+        transition: opacity 0.8s ease, transform 1s ease;
       }
-      .editorial-text {
-        flex: 1;
-        max-width: 400px;
+      .dissolve-before {
+        z-index: 1;
+        filter: grayscale(100%) contrast(1.2);
       }
-      .ed-kicker {
-        font-size: 0.75rem;
-        letter-spacing: 4px;
-        color: var(--brand-emerald);
-        text-transform: uppercase;
-        display: block;
-        margin-bottom: 1rem;
+      .dissolve-after {
+        z-index: 2;
+        opacity: 0;
       }
-      .ed-title {
-        font-size: 2.4rem;
-        font-weight: 300;
-        margin-bottom: 1.5rem;
-        line-height: 1.2;
+      .dissolve-card:hover .dissolve-after {
+        opacity: 1;
+        transform: scale(1.05);
       }
-      .ed-desc {
-        color: var(--text-secondary);
-        font-size: 0.95rem;
-        line-height: 1.8;
-        font-weight: 300;
+      .dissolve-card:hover .dissolve-before {
+        transform: scale(1.05);
       }
 
       .editorial-images {
-        flex: 1.5;
-        position: relative;
-        aspect-ratio: 4/3;
         cursor: pointer;
+        background: var(--bg-surface);
+        overflow: visible !important;
+        border: none;
+        box-shadow: none;
       }
       .editorial-images img {
         position: absolute;
-        border-radius: 2px;
+        border-radius: 4px;
         transition: var(--transition-smooth);
         pointer-events: none;
         object-fit: cover;
       }
-
       .ed-before {
-        width: 70%;
-        height: 80%;
+        width: 75%;
+        height: 85%;
         top: 0;
         left: 0;
         z-index: 1;
@@ -1006,66 +1174,768 @@
         bottom: 0;
         right: 0;
         z-index: 2;
-        box-shadow: -20px -20px 50px rgba(0, 0, 0, 0.6);
+        box-shadow: -15px -15px 30px rgba(0, 0, 0, 0.6);
         border: 1px solid rgba(255, 255, 255, 0.1);
       }
-
-      .editorial-row.reverse .ed-before {
-        left: auto;
-        right: 0;
-      }
-      .editorial-row.reverse .ed-after {
-        right: auto;
-        left: 0;
-        box-shadow: 20px -20px 50px rgba(0, 0, 0, 0.6);
-      }
-
       .editorial-images:hover .ed-before {
         filter: grayscale(0%) opacity(1);
-        transform: scale(0.95);
+        transform: scale(0.95) translate(-10px, -10px);
         z-index: 3;
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+        box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.6);
       }
       .editorial-images:hover .ed-after {
-        transform: scale(1.05) translateY(-10px);
+        transform: scale(1.05) translate(10px, 10px);
         z-index: 2;
-        opacity: 0.4;
+        opacity: 0.5;
+      }
+
+      /* =========================================
+           THE CLINIC (STICKY PARALLAX + TIMELINE)
+           ========================================= */
+      .clinic-journey {
+        position: relative;
+        padding: 8rem 0 0 0;
+        background-color: var(--bg-charcoal);
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      .clinic-journey-wrapper {
+        position: relative;
+        max-width: 1300px;
+        margin: 0 auto;
+        padding-left: 5%;
+      }
+
+      .clinic-timeline {
+        position: absolute;
+        left: 2.5%;
+        top: 0;
+        bottom: 0;
+        width: 1px;
+        background: rgba(255, 255, 255, 0.05);
+        z-index: 10;
+        display: block;
+      }
+      .timeline-progress {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: var(--brand-emerald);
+        height: 0%;
+        box-shadow: 0 0 15px var(--brand-emerald);
+        transition: height 0.1s ease-out;
+      }
+
+      .clinic-scene {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 5rem;
+        margin: 0 auto 15rem auto;
+        padding: 0 var(--container-padding);
+        position: relative;
+      }
+      .clinic-scene.reverse {
+        flex-direction: row-reverse;
+      }
+
+      .scene-text {
+        flex: 1;
+        position: sticky;
+        top: 35vh;
+        max-width: 450px;
+        z-index: 5;
+      }
+      .scene-step {
+        font-size: 5rem;
+        font-weight: 200;
+        color: rgba(255, 255, 255, 0.03);
+        position: absolute;
+        top: -3.5rem;
+        left: -2rem;
+        z-index: -1;
+        line-height: 1;
+      }
+      .scene-kicker {
+        font-size: 0.75rem;
+        letter-spacing: 4px;
+        color: var(--brand-emerald);
+        text-transform: uppercase;
+        display: block;
+        margin-bottom: 1rem;
+      }
+      .scene-title {
+        font-size: 3rem;
+        font-weight: 300;
+        line-height: 1.1;
+        margin-bottom: 1.5rem;
+        color: var(--text-primary);
+      }
+      .scene-desc {
+        font-size: 1.05rem;
+        line-height: 1.8;
+        font-weight: 300;
+        color: var(--text-secondary);
+      }
+
+      .scene-visuals {
+        flex: 1.5;
+        position: relative;
+        width: 100%;
+        min-height: 800px;
+      }
+      .parallax-layer {
+        position: absolute;
+        border-radius: 4px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        will-change: transform;
+      }
+      .parallax-layer img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 4px;
+        display: block;
+      }
+
+      .sc1-img1 {
+        top: 0;
+        left: 0;
+        width: 85%;
+        height: 600px;
+        z-index: 1;
+      }
+      .sc1-img2 {
+        top: 350px;
+        right: 0;
+        width: 65%;
+        height: 450px;
+        z-index: 2;
+        box-shadow: -20px 20px 50px rgba(0, 0, 0, 0.6);
+      }
+      .sc2-img1 {
+        top: 0;
+        right: 0;
+        width: 75%;
+        height: 500px;
+        z-index: 1;
+      }
+      .sc2-img2 {
+        top: 250px;
+        left: 0;
+        width: 55%;
+        height: 650px;
+        z-index: 2;
+      }
+      .sc2-img3 {
+        top: 600px;
+        right: 10%;
+        width: 40%;
+        height: 350px;
+        z-index: 3;
+      }
+      .sc3-img1 {
+        top: 0;
+        left: 10%;
+        width: 50%;
+        height: 400px;
+        z-index: 2;
+      }
+      .sc3-img2 {
+        top: 150px;
+        right: 0;
+        width: 60%;
+        height: 500px;
+        z-index: 1;
+      }
+      .sc3-img3 {
+        top: 450px;
+        left: 0;
+        width: 45%;
+        height: 600px;
+        z-index: 3;
+      }
+      .sc3-img4 {
+        top: 750px;
+        right: 15%;
+        width: 55%;
+        height: 400px;
+        z-index: 2;
+      }
+
+      .clinic-video-feature {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        margin-left: calc(-50vw + 50%);
+        background: #000;
+        overflow: hidden;
+      }
+      .clinic-video-feature video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.7;
+      }
+      .video-overlay-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        z-index: 2;
+        width: 100%;
+        padding: 0 20px;
+      }
+      .video-play-btn {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        background: rgba(10, 12, 11, 0.4);
+        backdrop-filter: blur(10px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 2rem auto;
+        color: var(--text-primary);
+        transition: var(--transition-smooth);
+        cursor: pointer;
+      }
+      .video-play-btn:hover {
+        background: var(--brand-emerald);
+        border-color: var(--brand-emerald);
+        transform: scale(1.1);
+      }
+      .video-play-btn svg {
+        width: 24px;
+        height: 24px;
+        fill: currentColor;
+        margin-left: 4px;
+      }
+
+      /* =========================================
+           THE INSTITUTE (B2B COURSES) 
+           ========================================= */
+      .institute-section {
+        padding: 10rem var(--container-padding) 6rem var(--container-padding);
+        background-color: var(--bg-onyx);
+        position: relative;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .inst-intro {
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto 5rem auto;
+      }
+      .inst-intro .scene-title {
+        font-size: 3.5rem;
+      }
+
+      .inst-stats-banner {
+        display: flex;
+        justify-content: center;
+        gap: 6rem;
+        padding: 4rem 0;
+        max-width: 1100px;
+        margin: 0 auto 4rem auto;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        flex-wrap: wrap;
+      }
+      .stat-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .stat-num-wrapper {
+        display: flex;
+        align-items: baseline;
+        margin-bottom: 0.5rem;
+      }
+      .stat-num {
+        font-size: 3.5rem;
+        color: var(--brand-emerald);
+        font-weight: 300;
+        line-height: 1;
+      }
+      .stat-plus {
+        font-size: 2.5rem;
+        color: var(--brand-emerald);
+        font-weight: 300;
+      }
+      .stat-text {
+        font-size: 2.5rem;
+        color: var(--brand-emerald);
+        font-weight: 300;
+        line-height: 1;
+        margin-bottom: 0.5rem;
+        margin-top: 10px;
+      }
+      .stat-label {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: var(--text-secondary);
+        font-weight: 500;
+      }
+
+      /* Fixed Hardware Accelerated Infinite Scroll */
+      .filmstrip-wrapper {
+        width: 100vw;
+        position: relative;
+        margin-left: calc(-50vw + 50%);
+        overflow: hidden;
+        padding: 3rem 0;
+        background: var(--bg-charcoal);
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      .filmstrip-track {
+        display: flex;
+        gap: 2rem;
+        width: max-content;
+        animation: scrollFilmstrip 40s linear infinite;
+        will-change: transform;
+      }
+      /* Prevent hover pause on touch devices */
+      @media (hover: hover) {
+        .filmstrip-track:hover {
+          animation-play-state: paused;
+          cursor: pointer;
+        }
+      }
+
+      .filmstrip-img {
+        height: 350px;
+        aspect-ratio: 4/3;
+        object-fit: cover;
+        border-radius: 4px;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+        filter: grayscale(30%);
+        transition: var(--transition-smooth);
+      }
+      .filmstrip-img:hover {
+        filter: grayscale(0%);
+        transform: scale(1.02);
+      }
+      @keyframes scrollFilmstrip {
+        0% {
+          transform: translate3d(0, 0, 0);
+        }
+        100% {
+          transform: translate3d(-50%, 0, 0);
+        }
+      }
+
+      .curriculum-container {
+        max-width: 1100px;
+        margin: 8rem auto 0 auto;
+      }
+      .curriculum-header {
+        font-size: 2rem;
+        font-weight: 300;
+        margin-bottom: 3rem;
+        color: var(--text-primary);
+        text-align: center;
+      }
+      .curriculum-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 3rem;
+      }
+
+      .course-card-premium {
+        background: var(--bg-surface);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 6px;
+        padding: 3rem;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+        transition: var(--transition-smooth);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+      .course-card-premium:hover {
+        transform: translateY(-10px);
+        border-color: rgba(15, 133, 70, 0.3);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+      }
+
+      .course-card-kicker {
+        font-size: 0.7rem;
+        color: var(--brand-emerald);
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        font-weight: 500;
+        margin-bottom: 1.5rem;
+        display: block;
+      }
+      .course-card-title {
+        font-size: 1.8rem;
+        font-weight: 300;
+        line-height: 1.3;
+        margin-bottom: 1.5rem;
+        color: var(--text-primary);
+      }
+
+      .learning-list {
+        list-style: none;
+        margin-top: 1rem;
+        flex-grow: 1;
+        padding-bottom: 2rem;
+      }
+      .learning-list li {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        font-weight: 300;
+        line-height: 1.5;
+      }
+      .learning-list li::before {
+        content: "→";
+        color: var(--brand-emerald);
+        font-weight: 500;
+      }
+
+      .institute-global-cta {
+        text-align: center;
+        margin-top: 6rem;
+        padding-top: 6rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        max-width: 800px;
+        margin-inline: auto;
+      }
+      .cta-title {
+        font-size: 2.2rem;
+        font-weight: 300;
+        margin-bottom: 1.5rem;
+        color: var(--text-primary);
+      }
+      .cta-desc {
+        color: var(--text-secondary);
+        font-size: 1rem;
+        font-weight: 300;
+        line-height: 1.7;
+        margin-bottom: 3rem;
+      }
+      .cta-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+      }
+
+      /* =========================================
+           LOCATION & CONTACT SECTION
+           ========================================= */
+      .location-section {
+        padding: 8rem var(--container-padding);
+        background-color: var(--bg-surface);
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      .map-container {
+        display: flex;
+        flex-direction: row;
+        gap: 4rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        align-items: center;
+      }
+      .map-info {
+        flex: 1;
+        min-width: 300px;
+      }
+      .map-info h3 {
+        font-size: 2.2rem;
+        font-weight: 300;
+        margin-bottom: 1rem;
+        color: var(--text-primary);
+      }
+      .map-info p {
+        color: var(--text-secondary);
+        line-height: 1.8;
+        margin-bottom: 2rem;
+        font-weight: 300;
+        font-size: 1.1rem;
+      }
+
+      .map-frame {
+        flex: 1.5;
+        width: 100%;
+        min-width: 300px;
+        border-radius: 4px;
+        overflow: hidden;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      .map-frame iframe {
+        display: block;
+        width: 100%;
+        height: 450px;
+        border: 0;
+        filter: grayscale(100%) contrast(1.1) opacity(0.8);
+        transition: var(--transition-smooth);
+      }
+      .map-frame iframe:hover {
+        filter: grayscale(0%) contrast(1) opacity(1);
+      }
+
+      /* =========================================
+           LUXURY FOOTER
+           ========================================= */
+      .luxury-footer {
+        background-color: #050606;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        padding: 6rem var(--container-padding) 2rem var(--container-padding);
+        color: var(--text-secondary);
+      }
+      .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 4rem;
+        max-width: 1300px;
+        margin: 0 auto;
+        padding-bottom: 4rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      .footer-col.brand-col {
+        grid-column: span 2;
+      }
+      .footer-col h4 {
+        color: var(--text-primary);
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        margin-bottom: 2rem;
+        font-weight: 500;
+      }
+      .footer-col ul {
+        list-style: none;
+      }
+      .footer-col ul li {
+        margin-bottom: 1rem;
+        font-size: 0.85rem;
+        font-weight: 300;
+        transition: var(--transition-smooth);
+      }
+      .footer-col ul li a {
+        transition: var(--transition-smooth);
+      }
+      .footer-col ul li a:hover {
+        color: var(--brand-emerald);
+        padding-left: 5px;
+      }
+
+      .brand-col p {
+        font-size: 0.9rem;
+        line-height: 1.8;
+        font-weight: 300;
+        margin-top: 1.5rem;
+        max-width: 350px;
+      }
+      .footer-logo {
+        height: 80px;
+        object-fit: contain;
+        filter: brightness(0) invert(1);
+        opacity: 0.8;
+        transition: var(--transition-smooth);
+      }
+      .footer-logo:hover {
+        opacity: 1;
+      }
+
+      .footer-socials {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+      }
+      .footer-social-link {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 0.85rem;
+        font-weight: 300;
+        transition: var(--transition-smooth);
+      }
+      /* Fixed SVG Paths */
+      .footer-social-link svg {
+        width: 16px;
+        height: 16px;
+        stroke: currentColor;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        fill: none;
+        transition: var(--transition-smooth);
+      }
+      .footer-social-link:hover {
+        color: var(--brand-emerald);
+      }
+
+      .footer-bottom {
+        text-align: center;
+        padding-top: 2rem;
+        font-size: 0.7rem;
+        font-weight: 300;
+        letter-spacing: 1px;
+        color: rgba(255, 255, 255, 0.3);
+      }
+
+      /* =========================================
+           RESPONSIVENESS (MOBILE/TABLET OPTIMIZATION)
+           ========================================= */
+      @media (max-width: 1150px) {
+        .hero-title {
+          font-size: 3.5rem;
+        }
       }
 
       @media (max-width: 1024px) {
-        .dissolve-grid,
-        .spotlight-grid {
+        .showcase-grid {
           grid-template-columns: 1fr;
+          gap: 4rem;
         }
-        .editorial-row,
-        .editorial-row.reverse {
+        .clinic-timeline {
+          display: none;
+        }
+        .clinic-journey-wrapper {
+          padding-left: 0;
+        }
+        .clinic-scene,
+        .clinic-scene.reverse {
           flex-direction: column;
-          gap: 2rem;
-          margin-bottom: 5rem;
+          gap: 4rem;
+          margin-bottom: 8rem;
         }
-        .editorial-text {
+        .scene-text {
+          position: relative;
+          top: 0;
           max-width: 100%;
           text-align: center;
         }
-        .editorial-images {
+        .scene-step {
+          left: 50%;
+          transform: translateX(-50%);
+          top: -2.5rem;
+        }
+        .scene-visuals {
           width: 100%;
+          min-height: 600px;
+        }
+        .inst-stats-banner {
+          flex-direction: column;
+          gap: 3rem;
+        }
+
+        /* Nav specific mobile logic */
+        .nav-links {
+          display: none;
+        } /* Hide the absolute desktop links */
+        .nav-cta-wrapper {
+          display: none;
+        } /* Hide desktop cta button */
+        .hamburger {
+          display: flex;
+        } /* Show mobile button */
+
+        .nav-logo {
+          height: 70px;
+        }
+        .luxury-nav.scrolled .nav-logo {
+          height: 60px;
         }
       }
+
       @media (max-width: 768px) {
-        .comparison-slider {
+        /* Hide right side of top bar to fit on mobile */
+        .top-bar-right {
+          display: none;
+        }
+
+        .hero-title {
+          font-size: 2.8rem;
+        }
+        .section-title,
+        .scene-title {
+          font-size: 2.4rem;
+        }
+        .hero-description {
+          font-size: 1rem;
+        }
+        .inst-intro .scene-title {
+          font-size: 2.5rem;
+        }
+
+        /* Force Hero Image Behind Text so layout stays clean */
+        .hero-visual {
+          width: 100vw;
+          margin: 0;
+          right: 0;
+          left: 0;
+          mask-image: none;
+          -webkit-mask-image: none;
+          opacity: 0.4 !important;
+        }
+        .hero-content {
+          padding-left: 0;
+        }
+
+        .scene-visuals {
+          min-height: auto;
+          display: flex;
+          flex-direction: column;
+          gap: 2rem;
+        }
+        .parallax-layer {
+          position: relative !important;
+          top: 0 !important;
+          left: 0 !important;
+          right: 0 !important;
+          width: 100% !important;
+          height: auto !important;
           aspect-ratio: 4/3;
+          transform: none !important;
         }
-        .case-label {
-          font-size: 0.55rem;
-          padding: 4px 10px;
+
+        .filmstrip-img {
+          height: 250px;
         }
-        .ed-before {
-          width: 80%;
-          height: 90%;
+        .course-card-premium {
+          padding: 2rem;
         }
-        .ed-after {
-          width: 80%;
-          height: 90%;
+
+        .map-container {
+          flex-direction: column;
+          gap: 2rem;
+          text-align: center;
+        }
+        .map-frame iframe {
+          height: 300px;
+        }
+
+        .footer-grid {
+          grid-template-columns: 1fr;
+          text-align: center;
+          gap: 3rem;
+        }
+        .footer-col.brand-col {
+          grid-column: span 1;
+        }
+        .brand-col p {
+          margin: 1.5rem auto 0 auto;
+        }
+        .footer-socials {
+          align-items: center;
+        }
+        .footer-col ul li a:hover {
+          padding-left: 0;
         }
       }
     </style>
@@ -1073,7 +1943,7 @@
   <body>
     <div class="top-bar">
       <div class="top-bar-left">
-        <a href="#" class="top-bar-item">
+        <a href="#contact" class="top-bar-item">
           <svg viewBox="0 0 24 24">
             <path
               d="M12 21c-4.418-6.136-7.5-10.377-7.5-13.5A7.5 7.5 0 0 1 12 3a7.5 7.5 0 0 1 7.5 4.5c0 3.123-3.082 7.364-7.5 13.5Z"
@@ -1099,20 +1969,24 @@
             href="https://www.facebook.com/miskanderclinic"
             target="_blank"
             class="social-icon"
-            ><svg viewBox="0 0 24 24">
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
               <path
                 d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
-              /></svg
-          ></a>
+              ></path>
+            </svg>
+          </a>
           <a
             href="https://www.instagram.com/miskanderclinic?igsh=MWoza3ZoNHJqZXhjYw=="
             target="_blank"
             class="social-icon"
-            ><svg viewBox="0 0 24 24">
-              <rect width="16" height="16" x="4" y="4" rx="4" />
-              <circle cx="12" cy="12" r="3" />
-              <line x1="16.5" x2="16.5" y1="7.5" y2="7.5" /></svg
-          ></a>
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </a>
         </div>
       </div>
     </div>
@@ -1123,16 +1997,74 @@
           ><img src="images-logo/1.png" alt="Logo" class="nav-logo"
         /></a>
       </div>
+
       <ul class="nav-links">
         <li><a href="#expertise">Expertise</a></li>
-        <li><a href="#dental-gallery">Dental Gallery</a></li>
-        <li><a href="#academics">Academics</a></li>
+        <li><a href="#dental-gallery">Gallery</a></li>
         <li><a href="#clinic">The Clinic</a></li>
+        <li><a href="#institute">Academics</a></li>
       </ul>
-      <div class="nav-cta-wrapper">
-        <a href="#contact" class="btn btn-white">Book Private Consultation</a>
+
+      <div class="nav-right">
+        <div class="nav-cta-wrapper">
+          <a href="#contact" class="btn btn-white">Book Consultation</a>
+        </div>
+        <button
+          class="hamburger"
+          id="mobile-menu-btn"
+          aria-label="Toggle Mobile Menu"
+        >
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
       </div>
     </nav>
+
+    <div class="nav-overlay" id="nav-overlay"></div>
+    <div class="offcanvas-menu" id="offcanvas-menu">
+      <div class="offcanvas-header">
+        <img src="images-logo/1.png" alt="Logo" class="offcanvas-logo" />
+        <button class="close-btn" id="close-menu-btn" aria-label="Close Menu">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M18 6L6 18M6 6l12 12"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              fill="none"
+            />
+          </svg>
+        </button>
+      </div>
+      <ul class="offcanvas-links">
+        <li><a href="#expertise" class="offcanvas-link">Expertise</a></li>
+        <li>
+          <a href="#dental-gallery" class="offcanvas-link">The Lookbook</a>
+        </li>
+        <li><a href="#clinic" class="offcanvas-link">The Clinic</a></li>
+        <li><a href="#institute" class="offcanvas-link">The Institute</a></li>
+      </ul>
+      <div class="offcanvas-footer">
+        <a href="#contact" class="btn btn-emerald w-100">Book Consultation</a>
+        <div class="offcanvas-socials">
+          <a
+            href="https://www.instagram.com/miskanderclinic?igsh=MWoza3ZoNHJqZXhjYw=="
+            target="_blank"
+            ><svg viewBox="0 0 24 24">
+              <rect width="16" height="16" x="4" y="4" rx="4" />
+              <circle cx="12" cy="12" r="3" />
+              <line x1="16.5" x2="16.5" y1="7.5" y2="7.5" /></svg
+          ></a>
+          <a href="https://www.facebook.com/miskanderclinic" target="_blank"
+            ><svg viewBox="0 0 24 24">
+              <path
+                d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+              /></svg
+          ></a>
+        </div>
+      </div>
+    </div>
 
     <header class="hero">
       <div class="hero-visual">
@@ -1164,7 +2096,7 @@
           most discerning patients.
         </p>
         <div class="hero-actions">
-          <a href="#consultation" class="btn btn-white">Schedule Assessment</a>
+          <a href="#contact" class="btn btn-white">Schedule Assessment</a>
         </div>
       </div>
     </header>
@@ -1275,139 +2207,595 @@
           </div>
         </div>
       </div>
+
+      <div class="global-cta-wrapper reveal-up delay-2">
+        <a href="#contact" class="btn btn-white">Consult With Our Experts</a>
+      </div>
     </section>
 
     <section id="dental-gallery" class="gallery-section">
       <div class="section-header">
-        <span class="section-kicker reveal-up delay-0"
-          >Signature Transformations</span
-        >
-        <h2 class="section-title reveal-cascade">
+        <span class="section-kicker reveal-up delay-0">Our Capabilities</span>
+        <h2 class="section-title reveal-cascade" style="margin-bottom: 2rem">
           <span class="word-wrap"><span class="word sw-1">The</span></span>
           <span class="word-wrap"><span class="word sw-2">Lookbook</span></span>
         </h2>
       </div>
 
-      <div class="gallery-wrapper">
-        <div class="comparison-slider reveal-up delay-2" id="compare-slider">
-          <img
-            src="Images-Patients/2.webp"
-            alt="After"
-            class="comp-img after-img"
-          />
-          <img
-            src="Images-Patients/1.webp"
-            alt="Before"
-            class="comp-img before-img"
-          />
+      <div class="showcase-grid">
+        <div class="showcase-item reveal-up delay-1">
+          <div class="interaction-frame comparison-slider" id="compare-slider">
+            <img src="Images-Patients/2.webp" class="comp-img after-img" />
+            <img src="Images-Patients/1.webp" class="comp-img before-img" />
+            <div class="slider-handle" id="slider-handle">
+              <div class="slider-button">
+                <svg viewBox="0 0 24 24">
+                  <path d="M15 18l-6-6 6-6" />
+                  <path d="M9 18l6-6-6-6" />
+                </svg>
+              </div>
+            </div>
+            <div class="hover-cue-text">[ ← DRAG TO COMPARE → ]</div>
+          </div>
 
-          <div class="slider-handle" id="slider-handle">
-            <div class="slider-button">
-              <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6" /></svg>
-              <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" /></svg>
+          <div class="case-info-bar">
+            <div class="case-header">
+              <div>
+                <span class="case-number">Case 01</span
+                ><span class="case-title">Ceramic Rehabilitation</span>
+              </div>
+              <button class="details-btn">+</button>
+            </div>
+            <div class="case-details-panel">
+              <p>
+                Restoring vertical dimension and correcting severe wear with
+                ultra-thin ceramic veneers for a naturally vibrant, structurally
+                sound smile.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="showcase-item reveal-up delay-2">
+          <div class="interaction-frame spotlight-card">
+            <img src="Images-Patients/7.webp" class="spotlight-before" />
+            <img src="Images-Patients/8.webp" class="spotlight-after" />
+            <div class="hover-cue-text">[ ⌕ HOVER TO EXPLORE ]</div>
+          </div>
+
+          <div class="case-info-bar">
+            <div class="case-header">
+              <div>
+                <span class="case-number">Case 04</span
+                ><span class="case-title">Gingival Contouring & E-Max</span>
+              </div>
+              <button class="details-btn">+</button>
+            </div>
+            <div class="case-details-panel">
+              <p>
+                Soft tissue laser leveling combined with custom E-Max crowns to
+                eliminate a gummy smile and establish perfect facial symmetry.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="showcase-item reveal-up delay-1">
+          <div class="interaction-frame dissolve-card">
+            <img src="Images-Patients/3.webp" class="dissolve-before" />
+            <img src="Images-Patients/4.webp" class="dissolve-after" />
+            <div class="hover-cue-text">[ ☼ HOVER TO REVEAL ]</div>
+          </div>
+
+          <div class="case-info-bar">
+            <div class="case-header">
+              <div>
+                <span class="case-number">Case 02</span
+                ><span class="case-title">Anterior Esthetic Redesign</span>
+              </div>
+              <button class="details-btn">+</button>
+            </div>
+            <div class="case-details-panel">
+              <p>
+                Closing diastemas and masking heavy discoloration using
+                minimally invasive bonding techniques to achieve a harmonious
+                arch.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="showcase-item reveal-up delay-2">
+          <div class="interaction-frame editorial-images">
+            <img src="Images-Patients/30.webp" class="ed-before" />
+            <img src="Images-Patients/31.webp" class="ed-after" />
+            <div class="hover-cue-text" style="z-index: 10">
+              [ ⤢ HOVER TO EXPAND ]
             </div>
           </div>
 
-          <span class="case-label label-before">Before</span>
-          <span class="case-label label-after">After</span>
-          <div class="hover-cue-text">[ DRAG TO COMPARE ]</div>
-        </div>
-
-        <div class="dissolve-grid reveal-up delay-1">
-          <div class="dissolve-card">
-            <img
-              src="Images-Patients/3.webp"
-              alt="Before"
-              class="dissolve-before"
-            />
-            <img
-              src="Images-Patients/4.webp"
-              alt="After"
-              class="dissolve-after"
-            />
-            <span class="case-label label-before">Case 02</span>
-            <div class="hover-cue-text">[ HOVER TO REVEAL ]</div>
-          </div>
-          <div class="dissolve-card">
-            <img
-              src="Images-Patients/5.webp"
-              alt="Before"
-              class="dissolve-before"
-            />
-            <img
-              src="Images-Patients/6.webp"
-              alt="After"
-              class="dissolve-after"
-            />
-            <span class="case-label label-before">Case 03</span>
-            <div class="hover-cue-text">[ HOVER TO REVEAL ]</div>
+          <div class="case-info-bar">
+            <div class="case-header">
+              <div>
+                <span class="case-number">Case 06</span
+                ><span class="case-title">Complete Smile Makeover</span>
+              </div>
+              <button class="details-btn">+</button>
+            </div>
+            <div class="case-details-panel">
+              <p>
+                A comprehensive transformation addressing profound structural
+                discrepancies and shade, delivering a luminous, age-defying
+                aesthetic.
+              </p>
+            </div>
           </div>
         </div>
+      </div>
 
-        <div class="spotlight-grid reveal-up delay-1">
-          <div class="spotlight-card">
-            <img
-              src="Images-Patients/7.webp"
-              alt="Before"
-              class="spotlight-before"
-            />
-            <img
-              src="Images-Patients/8.webp"
-              alt="After"
-              class="spotlight-after"
-            />
-            <span class="case-label label-before">Case 04</span>
-            <div class="hover-cue-text">[ SPOTLIGHT REVEAL ]</div>
-          </div>
-          <div class="spotlight-card">
-            <img
-              src="Images-Patients/9.webp"
-              alt="Before"
-              class="spotlight-before"
-            />
-            <img
-              src="Images-Patients/10.webp"
-              alt="After"
-              class="spotlight-after"
-            />
-            <span class="case-label label-before">Case 05</span>
-            <div class="hover-cue-text">[ SPOTLIGHT REVEAL ]</div>
-          </div>
+      <div class="global-cta-wrapper reveal-up delay-2">
+        <a href="#contact" class="btn btn-emerald">Start Your Transformation</a>
+      </div>
+    </section>
+
+    <section id="clinic" class="clinic-journey">
+      <div class="clinic-journey-wrapper">
+        <div class="clinic-timeline">
+          <div class="timeline-progress" id="clinic-timeline-progress"></div>
         </div>
 
-        <div class="editorial-row reveal-up delay-1">
-          <div class="editorial-text">
-            <span class="ed-kicker">Case Study 06</span>
-            <h3 class="ed-title">Architectural Harmony.</h3>
-            <p class="ed-desc">
-              A complete structural redesign. By utilizing ultra-thin ceramic
-              restorations, we achieved a flawless, natural symmetry that
-              respects the underlying biology of the smile.
+        <div class="clinic-scene">
+          <div class="scene-text reveal-up">
+            <div class="scene-step">01</div>
+            <span class="scene-kicker">The Environment</span>
+            <h2 class="scene-title reveal-cascade">
+              <span class="word-wrap"><span class="word sw-1">The</span></span>
+              <span class="word-wrap"
+                ><span class="word sw-2">Arrival.</span></span
+              >
+            </h2>
+            <p class="scene-desc">
+              Step into a space engineered to eliminate clinical anxiety. From
+              the moment you arrive, our bespoke lounge sets a tone of absolute
+              serenity and uncompromised luxury before your treatment even
+              begins.
             </p>
           </div>
-          <div class="editorial-images">
-            <img src="Images-Patients/30.webp" alt="Before" class="ed-before" />
-            <img src="Images-Patients/31.webp" alt="After" class="ed-after" />
+          <div class="scene-visuals">
+            <div class="parallax-layer sc1-img1" data-speed="0.08">
+              <img
+                src="images-clinic/1.JPG"
+                alt="Clinic Reception"
+                onerror="this.src='https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1000&q=80'"
+              />
+            </div>
+            <div class="parallax-layer sc1-img2" data-speed="-0.15">
+              <img
+                src="images-clinic/2.JPG"
+                alt="Patient Lounge"
+                onerror="this.src='https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80'"
+              />
+            </div>
           </div>
         </div>
 
-        <div class="editorial-row reverse reveal-up delay-1">
-          <div class="editorial-text">
-            <span class="ed-kicker">Case Study 07</span>
-            <h3 class="ed-title">Luminescent Vitality.</h3>
-            <p class="ed-desc">
-              Correcting severe discoloration and foundational wear. Through
-              precise color-matching and contouring, the result is a vibrant,
-              youthful aesthetic that feels entirely authentic.
+        <div class="clinic-scene reverse">
+          <div class="scene-text reveal-up">
+            <div class="scene-step" style="left: auto; right: -2rem">02</div>
+            <span class="scene-kicker">The Treatment</span>
+            <h2 class="scene-title reveal-cascade">
+              <span class="word-wrap"
+                ><span class="word sw-1">Clinical</span></span
+              >
+              <span class="word-wrap"
+                ><span class="word sw-2">Theater.</span></span
+              >
+            </h2>
+            <p class="scene-desc">
+              Private, state-of-the-art treatment suites. Every detail, from the
+              lighting to the ergonomic seating, is optimized for your absolute
+              comfort and our doctors' unrelenting precision.
             </p>
           </div>
-          <div class="editorial-images">
-            <img src="Images-Patients/34.webp" alt="Before" class="ed-before" />
-            <img src="Images-Patients/35.webp" alt="After" class="ed-after" />
+          <div class="scene-visuals">
+            <div class="parallax-layer sc2-img1" data-speed="-0.05">
+              <img
+                src="images-clinic/3.JPG"
+                alt="Treatment Room"
+                onerror="this.src='https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=1000&q=80'"
+              />
+            </div>
+            <div class="parallax-layer sc2-img2" data-speed="0.12">
+              <img
+                src="images-clinic/4.JPG"
+                alt="Dental Chair"
+                onerror="this.src='https://images.unsplash.com/photo-1536849460588-69f4fa1a7b10?auto=format&fit=crop&w=800&q=80'"
+              />
+            </div>
+            <div class="parallax-layer sc2-img3" data-speed="-0.08">
+              <img
+                src="images-clinic/5.JPG"
+                alt="Clinic Details"
+                onerror="this.src='https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=80'"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="clinic-scene">
+          <div class="scene-text reveal-up">
+            <div class="scene-step">03</div>
+            <span class="scene-kicker">In-House Mastery</span>
+            <h2 class="scene-title reveal-cascade">
+              <span class="word-wrap"
+                ><span class="word sw-1">Uncompromised</span></span
+              ><br />
+              <span class="word-wrap"
+                ><span class="word sw-2">Technology.</span></span
+              >
+            </h2>
+            <p class="scene-desc">
+              True luxury is convenience. With our proprietary in-house 3D
+              imaging, X-ray centers, and advanced digital milling machines,
+              your entire rehabilitation is executed flawlessly under one roof.
+              No referrals. No waiting.
+            </p>
+          </div>
+          <div class="scene-visuals" style="min-height: 1200px">
+            <div class="parallax-layer sc3-img1" data-speed="0.06">
+              <img
+                src="images-clinic/6.JPG"
+                alt="3D Imaging"
+                onerror="this.src='https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=800&q=80'"
+              />
+            </div>
+            <div class="parallax-layer sc3-img2" data-speed="-0.1">
+              <img
+                src="images-clinic/7.JPG"
+                alt="X-Ray Machine"
+                onerror="this.src='https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=800&q=80'"
+              />
+            </div>
+            <div class="parallax-layer sc3-img3" data-speed="0.15">
+              <img
+                src="images-clinic/8.JPG"
+                alt="Lab Equipment"
+                onerror="this.src='https://images.unsplash.com/photo-1583324113626-70df0f4deaab?auto=format&fit=crop&w=800&q=80'"
+              />
+            </div>
+            <div class="parallax-layer sc3-img4" data-speed="-0.05">
+              <img
+                src="images-clinic/9.JPG"
+                alt="Digital Milling"
+                onerror="this.src='https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=800&q=80'"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="clinic-video-feature reveal-up">
+        <video
+          autoplay
+          loop
+          muted
+          playsinline
+          src="images-clinic/10.mp4"
+        ></video>
+        <div class="video-overlay-content">
+          <div class="video-play-btn">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+          </div>
+          <h2 class="scene-title" style="margin-bottom: 0">
+            Experience The Gallery.
+          </h2>
+        </div>
+      </div>
+
+      <div class="global-cta-wrapper reveal-up delay-2" style="padding: 4rem 0">
+        <a href="#contact" class="btn btn-white">Experience it yourself</a>
+      </div>
+    </section>
+
+    <section id="institute" class="institute-section">
+      <div class="inst-intro reveal-up">
+        <span
+          class="section-kicker"
+          style="
+            margin-bottom: 1.5rem;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--brand-emerald);
+            display: block;
+            font-weight: 500;
+          "
+          >Founder & CEO</span
+        >
+        <h2
+          class="scene-title reveal-cascade"
+          style="
+            font-weight: 300;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+          "
+        >
+          <span class="word-wrap"><span class="word sw-1">Dental</span></span>
+          <span class="word-wrap"><span class="word sw-2">Gallery</span></span>
+          <span class="word-wrap"
+            ><span class="word sw-3">Institute.</span></span
+          >
+        </h2>
+      </div>
+
+      <div class="inst-stats-banner reveal-up delay-1">
+        <div class="stat-box">
+          <div class="stat-num-wrapper">
+            <span class="stat-num" data-target="15">0</span
+            ><span class="stat-plus">+</span>
+          </div>
+          <span class="stat-label">Years of Excellence</span>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num-wrapper">
+            <span class="stat-num" data-target="5000">0</span
+            ><span class="stat-plus">+</span>
+          </div>
+          <span class="stat-label">Cases Rehabilitated</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-text">Global</span>
+          <span class="stat-label">Masterclasses Delivered</span>
+        </div>
+      </div>
+
+      <div class="filmstrip-wrapper reveal-up delay-2">
+        <div class="filmstrip-track">
+          <img
+            src="Dental-Gallery-Micheal/IMG_5683.jpg"
+            class="filmstrip-img"
+          />
+          <img src="Dental-Gallery-Micheal/1.JPG" class="filmstrip-img" />
+          <img src="Dental-Gallery-Micheal/2.JPG" class="filmstrip-img" />
+          <img src="Dental-Gallery-Micheal/3.JPG" class="filmstrip-img" />
+          <img src="Dental-Gallery-Micheal/4.JPG" class="filmstrip-img" />
+          <img src="Dental-Gallery-Micheal/5.JPG" class="filmstrip-img" />
+          <img src="Dental-Gallery-Micheal/6.JPG" class="filmstrip-img" />
+          <img src="Dental-Gallery-Micheal/7.JPG" class="filmstrip-img" />
+          <img src="Dental-Gallery-Micheal/8.JPG" class="filmstrip-img" />
+
+          <img
+            src="Dental-Gallery-Micheal/IMG_5683.jpg"
+            class="filmstrip-img"
+          />
+          <img src="Dental-Gallery-Micheal/1.JPG" class="filmstrip-img" />
+          <img src="Dental-Gallery-Micheal/2.JPG" class="filmstrip-img" />
+          <img src="Dental-Gallery-Micheal/3.JPG" class="filmstrip-img" />
+          <img src="Dental-Gallery-Micheal/4.JPG" class="filmstrip-img" />
+          <img src="Dental-Gallery-Micheal/5.JPG" class="filmstrip-img" />
+          <img src="Dental-Gallery-Micheal/6.JPG" class="filmstrip-img" />
+          <img src="Dental-Gallery-Micheal/7.JPG" class="filmstrip-img" />
+          <img src="Dental-Gallery-Micheal/8.JPG" class="filmstrip-img" />
+        </div>
+      </div>
+
+      <div class="curriculum-container">
+        <h3 class="curriculum-header reveal-up delay-0">
+          Executive Masterclasses
+        </h3>
+
+        <div class="curriculum-grid">
+          <div class="course-card-premium reveal-up delay-1">
+            <span class="course-card-kicker">Curriculum — Module 01</span>
+            <h4 class="course-card-title">
+              Advanced Implantology & Periodontics
+            </h4>
+            <ul class="learning-list">
+              <li>Soft Tissue Architecture & Flap Design</li>
+              <li>Predictable Bone Grafting Protocols</li>
+              <li>Immediate Placement & Loading Strategies</li>
+              <li>Managing Surgical Complications</li>
+            </ul>
+          </div>
+
+          <div class="course-card-premium reveal-up delay-2">
+            <span class="course-card-kicker">Curriculum — Module 02</span>
+            <h4 class="course-card-title">Comprehensive Prosthodontics</h4>
+            <ul class="learning-list">
+              <li>Mastering the Center of Rotation (COR)</li>
+              <li>Vertical Dimension (VDO) Alterations</li>
+              <li>Face-Bow Transfer & Articulator Mounting</li>
+              <li>Complex Full-Arch Rehabilitations</li>
+            </ul>
+          </div>
+
+          <div class="course-card-premium reveal-up delay-1">
+            <span class="course-card-kicker">Curriculum — Module 03</span>
+            <h4 class="course-card-title">Biomimetic Anterior Aesthetics</h4>
+            <ul class="learning-list">
+              <li>Advanced Rubber Dam Isolation</li>
+              <li>Ultra-Thin Ceramic Veneer Preparations</li>
+              <li>Flawless Adhesive Bonding Protocols</li>
+              <li>Optical Dynamics & Shade Matching</li>
+            </ul>
+          </div>
+
+          <div class="course-card-premium reveal-up delay-2">
+            <span class="course-card-kicker">Executive Mentorship</span>
+            <h4 class="course-card-title">The Business of Elite Dentistry</h4>
+            <ul class="learning-list">
+              <li>Transitioning to a Premium Brand Positioning</li>
+              <li>Mastering Treatment Plan Presentations</li>
+              <li>High-Ticket Case Acceptance Strategies</li>
+              <li>Clinical Workflow Efficiency & Delegation</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="institute-global-cta reveal-up">
+          <h3 class="cta-title">Next Enrollment & Live Updates</h3>
+          <p class="cta-desc">
+            Follow the Dental Gallery Training Institute across our social
+            channels to receive exclusive announcements on upcoming course
+            dates, live surgical demonstrations, and clinical insights from Dr.
+            Michael Iskander.
+          </p>
+          <div class="cta-buttons">
+            <a
+              href="https://www.instagram.com/dentalgallerytraininginstitute?igsh=b3dpbWNlNzdxNHAw"
+              target="_blank"
+              class="btn btn-emerald"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path
+                  d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
+                ></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+              Instagram
+            </a>
+            <a
+              href="https://www.facebook.com/share/18WfnTrYT1/?mibextid=wwXIfr"
+              target="_blank"
+              class="btn btn-white"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path
+                  d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+                ></path>
+              </svg>
+              Facebook
+            </a>
           </div>
         </div>
       </div>
     </section>
+
+    <section id="contact" class="location-section">
+      <div class="section-header reveal-up delay-0">
+        <span class="section-kicker">Visit Us</span>
+        <h2 class="section-title reveal-cascade" style="margin-bottom: 4rem">
+          <span class="word-wrap"><span class="word sw-1">Our</span></span>
+          <span class="word-wrap"
+            ><span class="word sw-2">Location.</span></span
+          >
+        </h2>
+      </div>
+
+      <div class="map-container reveal-up delay-1">
+        <div class="map-info">
+          <h3>Dental Gallery</h3>
+          <p>
+            Premium Dental Care & Institute<br />
+            Cairo, Egypt
+          </p>
+          <a href="#contact" class="btn btn-emerald">Book Consultation</a>
+        </div>
+
+        <div class="map-frame">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3454.6194724527527!2d31.461065975734268!3d30.01908101977174!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x145823ec5b4357a9%3A0x512fd2784a007beb!2sDr%20Michael%20Iskander%20Dental%20Clinics!5e0!3m2!1sen!2seg!4v1776991489511!5m2!1sen!2seg"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+
+    <footer class="luxury-footer">
+      <div class="footer-grid">
+        <div class="footer-col brand-col">
+          <img
+            src="images-logo/1.png"
+            alt="Dental Gallery Logo"
+            class="footer-logo"
+          />
+          <p>
+            The apex of modern dentistry and restorative education. Engineering
+            flawless, enduring smiles in Cairo, Egypt.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="#expertise">Expertise</a></li>
+            <li><a href="#dental-gallery">The Lookbook</a></li>
+            <li><a href="#clinic">The Clinic</a></li>
+            <li><a href="#institute">The Institute</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <div class="footer-socials">
+            <a
+              href="https://www.instagram.com/miskanderclinic?igsh=MWoza3ZoNHJqZXhjYw=="
+              target="_blank"
+              class="footer-social-link"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path
+                  d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
+                ></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+              Clinic Instagram
+            </a>
+            <a
+              href="https://www.facebook.com/miskanderclinic"
+              target="_blank"
+              class="footer-social-link"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path
+                  d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+                ></path>
+              </svg>
+              Clinic Facebook
+            </a>
+            <a
+              href="https://www.instagram.com/dentalgallerytraininginstitute?igsh=b3dpbWNlNzdxNHAw"
+              target="_blank"
+              class="footer-social-link"
+              style="margin-top: 0.5rem"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path
+                  d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
+                ></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+              Institute Instagram
+            </a>
+            <a
+              href="https://www.facebook.com/share/18WfnTrYT1/?mibextid=wwXIfr"
+              target="_blank"
+              class="footer-social-link"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path
+                  d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+                ></path>
+              </svg>
+              Institute Facebook
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>
+          © 2026 Dr. Michael Iskander | Dental Gallery Institute. All rights
+          reserved.
+        </p>
+      </div>
+    </footer>
 
     <script>
       document.addEventListener("DOMContentLoaded", () => {
@@ -1421,11 +2809,42 @@
           }
         });
 
+        /* --- 1.b Mobile Hamburger Menu Logic --- */
+        const hamburgerBtn = document.getElementById("mobile-menu-btn");
+        const navLinksMenu = document.getElementById("offcanvas-menu");
+        const navOverlay = document.getElementById("nav-overlay");
+        const closeMenuBtn = document.getElementById("close-menu-btn");
+        const mobileLinks = navLinksMenu.querySelectorAll("a");
+
+        function toggleMobileMenu() {
+          navLinksMenu.classList.toggle("active");
+          navOverlay.classList.toggle("active");
+          document.body.style.overflow = navLinksMenu.classList.contains(
+            "active"
+          )
+            ? "hidden"
+            : "";
+        }
+
+        if (hamburgerBtn)
+          hamburgerBtn.addEventListener("click", toggleMobileMenu);
+        if (closeMenuBtn)
+          closeMenuBtn.addEventListener("click", toggleMobileMenu);
+        if (navOverlay) navOverlay.addEventListener("click", toggleMobileMenu);
+
+        mobileLinks.forEach((link) => {
+          link.addEventListener("click", () => {
+            navLinksMenu.classList.remove("active");
+            navOverlay.classList.remove("active");
+            document.body.style.overflow = "";
+          });
+        });
+
         /* --- 2. Scroll Reveal Observer --- */
         const observerOptions = {
           root: null,
           rootMargin: "0px 0px -15% 0px",
-          threshold: 0,
+          threshold: 0.1,
         };
         const observer = new IntersectionObserver((entries, observer) => {
           entries.forEach((entry) => {
@@ -1441,21 +2860,18 @@
             observer.observe(element);
           });
 
-        /* --- 3. Interactive Drag-to-Reveal (Bug Fixed) --- */
+        /* --- 3. Interactive Drag-to-Reveal --- */
         const slider = document.getElementById("compare-slider");
         if (slider) {
           const handle = document.getElementById("slider-handle");
           const beforeImg = slider.querySelector(".before-img");
-          const cueText = slider.querySelector(".hover-cue-text");
           let isDragging = false;
 
           const moveSlider = (e) => {
             if (!isDragging) return;
-
             const rect = slider.getBoundingClientRect();
             let x = e.clientX - rect.left;
             if (e.type.includes("touch")) x = e.touches[0].clientX - rect.left;
-
             x = Math.max(0, Math.min(x, rect.width));
             const percentage = (x / rect.width) * 100;
 
@@ -1464,26 +2880,113 @@
             beforeImg.style.webkitClipPath = `polygon(0 0, ${percentage}% 0, ${percentage}% 100%, 0 100%)`;
           };
 
-          // Desktop
           slider.addEventListener("mousedown", () => {
             isDragging = true;
-            cueText.style.opacity = 0;
           });
           window.addEventListener("mouseup", () => (isDragging = false));
           window.addEventListener("mousemove", moveSlider);
 
-          // Mobile
           slider.addEventListener(
             "touchstart",
             () => {
               isDragging = true;
-              cueText.style.opacity = 0;
             },
             { passive: true }
           );
           window.addEventListener("touchend", () => (isDragging = false));
           window.addEventListener("touchmove", moveSlider, { passive: true });
         }
+
+        /* --- 4. Spotlight Mouse Tracking --- */
+        const spotlight = document.querySelector(".spotlight-card");
+        if (spotlight) {
+          spotlight.addEventListener("mousemove", (e) => {
+            const rect = e.currentTarget.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            e.currentTarget.style.setProperty("--mouse-x", `${x}%`);
+            e.currentTarget.style.setProperty("--mouse-y", `${y}%`);
+          });
+        }
+
+        /* --- 5. Case Details Accordion Toggle --- */
+        const infoHeaders = document.querySelectorAll(".case-header");
+        infoHeaders.forEach((header) => {
+          header.addEventListener("click", () => {
+            const parentBar = header.parentElement;
+            parentBar.classList.toggle("open");
+          });
+        });
+
+        /* --- 6. Cinematic Parallax Scroll Logic --- */
+        let ticking = false;
+        window.addEventListener("scroll", () => {
+          if (!ticking && window.innerWidth > 768) {
+            window.requestAnimationFrame(() => {
+              document.querySelectorAll(".parallax-layer").forEach((el) => {
+                const parentRect = el.parentElement.getBoundingClientRect();
+                const speed = parseFloat(el.getAttribute("data-speed")) || 0.1;
+                const centerDiff =
+                  window.innerHeight / 2 -
+                  (parentRect.top + parentRect.height / 2);
+                el.style.transform = `translateY(${centerDiff * speed}px)`;
+              });
+              ticking = false;
+            });
+            ticking = true;
+          }
+        });
+
+        /* --- 7. Timeline Scroll Progress --- */
+        const clinicSection = document.querySelector(".clinic-journey-wrapper");
+        const progressBar = document.getElementById("clinic-timeline-progress");
+
+        if (clinicSection && progressBar) {
+          window.addEventListener("scroll", () => {
+            const rect = clinicSection.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            const totalScroll = rect.height;
+            const currentScroll = windowHeight / 2 - rect.top;
+
+            let progress = (currentScroll / totalScroll) * 100;
+            progress = Math.max(0, Math.min(progress, 100));
+
+            progressBar.style.height = `${progress}%`;
+          });
+        }
+
+        /* --- 8. Live Number Counter for Stats --- */
+        const statNums = document.querySelectorAll(".stat-num[data-target]");
+        const statObserver = new IntersectionObserver(
+          (entries, obs) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const target = parseInt(
+                  entry.target.getAttribute("data-target")
+                );
+                const duration = 2000;
+                const step = target / (duration / 16);
+                let current = 0;
+
+                const updateNum = () => {
+                  current += step;
+                  if (current < target) {
+                    entry.target.innerText =
+                      Math.ceil(current).toLocaleString();
+                    requestAnimationFrame(updateNum);
+                  } else {
+                    entry.target.innerText = target.toLocaleString();
+                  }
+                };
+                updateNum();
+                obs.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.5 }
+        );
+
+        statNums.forEach((num) => statObserver.observe(num));
       });
     </script>
   </body>
