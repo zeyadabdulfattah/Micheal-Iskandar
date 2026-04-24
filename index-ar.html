@@ -1,0 +1,3076 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>د. مايكل إسكندر | رعاية أسنان فاخرة وإتقان فائق</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* =========================================
+           CSS VARIABLES & DESIGN TOKENS
+           ========================================= */
+      :root {
+        --bg-onyx: #0a0c0b;
+        --bg-surface: #141715;
+        --bg-charcoal: #111312;
+        --brand-emerald: #0f8546;
+        --text-primary: #ffffff;
+        --text-secondary: #a0aab2;
+
+        --font-main: "Cairo", sans-serif;
+
+        --topbar-height: 50px;
+        --nav-height: 120px;
+        --container-padding: 5%;
+        --transition-smooth: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        background-color: var(--bg-onyx);
+        color: var(--text-primary);
+        font-family: var(--font-main);
+        -webkit-font-smoothing: antialiased;
+        overflow-x: clip;
+        width: 100%;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      /* =========================================
+           GLOBAL CTA WRAPPER
+           ========================================= */
+      .global-cta-wrapper {
+        display: flex;
+        justify-content: center;
+        margin-top: 4rem;
+        width: 100%;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 12px 28px;
+        font-family: var(--font-main);
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: var(--transition-smooth);
+        border-radius: 2px;
+        text-align: center;
+        white-space: nowrap;
+      }
+      .btn svg {
+        width: 16px;
+        height: 16px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        transform: scaleX(-1); /* Flips arrow for RTL */
+      }
+      .btn-white {
+        background: transparent;
+        color: var(--text-primary);
+        border: 1px solid var(--text-primary);
+      }
+      .btn-white:hover {
+        background: var(--text-primary);
+        color: var(--bg-onyx);
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+      }
+      .btn-emerald {
+        background: var(--brand-emerald);
+        color: var(--text-primary);
+        border: 1px solid var(--brand-emerald);
+      }
+      .btn-emerald:hover {
+        background: transparent;
+        color: var(--brand-emerald);
+        box-shadow: 0 0 20px rgba(15, 133, 70, 0.4);
+      }
+
+      /* =========================================
+           TOP BAR
+           ========================================= */
+      .top-bar {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: var(--topbar-height);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 var(--container-padding);
+        background-color: var(--bg-onyx);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        z-index: 1002;
+        font-size: 0.8rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        font-weight: 500;
+      }
+
+      .top-bar-left,
+      .top-bar-right {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+      }
+      .top-bar-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: var(--transition-smooth);
+      }
+      .top-bar-item:hover {
+        color: var(--brand-emerald);
+      }
+      .top-bar-item svg {
+        width: 16px;
+        height: 16px;
+        stroke: currentColor;
+        stroke-width: 1.5;
+        fill: none;
+        color: var(--brand-emerald);
+        transition: var(--transition-smooth);
+      }
+      .lang-switcher .divider {
+        color: rgba(255, 255, 255, 0.2);
+        margin: 0 6px;
+      }
+      .lang-switcher span {
+        transition: var(--transition-smooth);
+      }
+      .lang-switcher span:hover {
+        color: var(--brand-emerald);
+        cursor: pointer;
+      }
+      .social-links {
+        display: flex;
+        gap: 1.2rem;
+      }
+      .social-icon {
+        display: flex;
+        transition: var(--transition-smooth);
+      }
+      .social-icon svg {
+        width: 16px;
+        height: 16px;
+        stroke: currentColor;
+        stroke-width: 1.5;
+        fill: none;
+      }
+      .social-icon:hover {
+        color: var(--brand-emerald);
+        transform: translateY(-2px);
+      }
+
+      /* =========================================
+           DESKTOP NAVIGATION
+           ========================================= */
+      .luxury-nav {
+        position: fixed;
+        top: var(--topbar-height);
+        right: 0;
+        width: 100%;
+        height: var(--nav-height);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 var(--container-padding);
+        z-index: 1000;
+        transition: var(--transition-smooth);
+      }
+      .luxury-nav.scrolled {
+        background: rgba(10, 12, 11, 0.95);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        height: 90px;
+      }
+      .nav-brand {
+        z-index: 1001;
+        display: flex;
+        align-items: center;
+        margin-right: -50px;
+      }
+      .nav-logo {
+        height: 90px;
+        width: auto;
+        max-width: 25vw;
+        object-fit: contain;
+        transition: var(--transition-smooth);
+      }
+      .luxury-nav.scrolled .nav-logo {
+        height: 60px;
+      }
+      .nav-logo:hover {
+        opacity: 0.8;
+      }
+
+      .nav-links-desktop {
+        position: absolute;
+        right: 50%;
+        transform: translateX(50%);
+        display: flex;
+        gap: 3rem;
+        list-style: none;
+        white-space: nowrap;
+        margin: 0;
+        padding: 0;
+      }
+      .nav-links-desktop li a {
+        font-size: 0.9rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        position: relative;
+        padding-bottom: 5px;
+        transition: var(--transition-smooth);
+        color: var(--text-primary);
+      }
+      .nav-links-desktop li a::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 1px;
+        bottom: 0;
+        right: 0;
+        background-color: var(--brand-emerald);
+        transition: var(--transition-smooth);
+      }
+      .nav-links-desktop li a:hover {
+        color: var(--brand-emerald);
+      }
+      .nav-links-desktop li a:hover::after {
+        width: 100%;
+      }
+
+      .nav-left {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        z-index: 1001;
+      }
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 30px;
+        height: 18px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        z-index: 1001;
+      }
+      .hamburger .bar {
+        width: 100%;
+        height: 2px;
+        background-color: var(--text-primary);
+        transition: 0.3s ease;
+      }
+
+      /* =========================================
+           OFF-CANVAS MOBILE MENU
+           ========================================= */
+      .nav-overlay {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        z-index: 1050;
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.4s ease;
+        cursor: pointer;
+      }
+      .nav-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .mobile-menu {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 350px;
+        max-width: 100vw;
+        height: 100vh;
+        background: var(--bg-charcoal);
+        border-right: 1px solid rgba(255, 255, 255, 0.05);
+        z-index: 1051;
+        display: flex;
+        flex-direction: column;
+        padding: 2.5rem;
+        transition: 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        box-shadow: 20px 0 50px rgba(0, 0, 0, 0.7);
+        overflow-y: auto;
+      }
+      .mobile-menu.active {
+        left: 0;
+      }
+
+      .mobile-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 4rem;
+      }
+      .mobile-logo {
+        height: 50px;
+        object-fit: contain;
+      }
+      .close-btn {
+        background: none;
+        border: none;
+        color: var(--text-primary);
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.3s ease, color 0.3s ease;
+      }
+      .close-btn:hover {
+        color: var(--brand-emerald);
+        transform: rotate(90deg);
+      }
+      .close-btn svg {
+        width: 28px;
+        height: 28px;
+        stroke: currentColor;
+        stroke-width: 1.5;
+        stroke-linecap: round;
+        fill: none;
+      }
+
+      .mobile-links {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        margin-bottom: auto;
+      }
+      .mobile-link {
+        font-size: 1.4rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--text-primary);
+        transition: 0.3s ease;
+      }
+      .mobile-link:hover {
+        color: var(--brand-emerald);
+        transform: translateX(-10px);
+      }
+
+      .mobile-footer {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        padding-top: 3rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        margin-top: 3rem;
+      }
+      .mobile-socials {
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+      }
+      .mobile-socials a {
+        color: var(--text-primary);
+        transition: 0.3s ease;
+      }
+      .mobile-socials a:hover {
+        color: var(--brand-emerald);
+        transform: translateY(-3px);
+      }
+      .mobile-socials svg {
+        width: 22px;
+        height: 22px;
+        stroke: currentColor;
+        stroke-width: 1.5;
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      /* =========================================
+           HERO SECTION
+           ========================================= */
+      .hero {
+        position: relative;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        padding: 0 var(--container-padding);
+        padding-top: calc(var(--nav-height) + var(--topbar-height));
+        overflow: hidden;
+      }
+      .hero-visual {
+        position: absolute;
+        left: 0;
+        top: 0;
+        margin-top: 70px;
+        margin-left: 5px;
+        width: 45vw;
+        height: 100vh;
+        z-index: 1;
+        opacity: 0;
+        animation: cinematicReveal 2s ease-in-out forwards;
+        mask-image: linear-gradient(to left, transparent 0%, black 25%);
+        -webkit-mask-image: linear-gradient(to left, transparent 0%, black 25%);
+      }
+      .hero-visual img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: left 15%;
+        animation: slowZoom 15s ease-out forwards;
+        pointer-events: none;
+      }
+      .hero-visual::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          to left,
+          var(--bg-onyx) 0%,
+          transparent 50%
+        );
+        z-index: 2;
+      }
+      .hero-visual::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        height: 30%;
+        background: linear-gradient(
+          to top,
+          var(--bg-onyx) 0%,
+          transparent 100%
+        );
+        z-index: 2;
+      }
+
+      .hero-accent-line {
+        position: absolute;
+        right: 3%;
+        top: 25%;
+        width: 1px;
+        background: linear-gradient(
+          to bottom,
+          transparent,
+          #ffffff,
+          var(--brand-emerald),
+          transparent
+        );
+        z-index: 3;
+        animation: growLine 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards 0.8s;
+        height: 0;
+        opacity: 0;
+      }
+
+      .hero-content {
+        position: relative;
+        max-width: 650px;
+        padding-right: 5rem;
+        z-index: 4;
+      }
+
+      .hero-kicker {
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: var(--brand-emerald);
+        margin-bottom: 1.5rem;
+        display: block;
+        font-weight: 600;
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 0.1s;
+      }
+      .hero-title {
+        font-size: 4.5rem;
+        line-height: 1.2;
+        font-weight: 300;
+        margin-bottom: 2rem;
+      }
+      .hero-title strong {
+        font-weight: 700;
+      }
+
+      .word-wrap {
+        display: inline-block;
+        overflow: hidden;
+        vertical-align: bottom;
+        padding-bottom: 0.1em;
+        margin-bottom: -0.1em;
+      }
+      .word {
+        display: inline-block;
+        transform: translateY(110%);
+        opacity: 0;
+      }
+      .hero-title .word {
+        animation: cascadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+      }
+      .w-1 {
+        animation-delay: 0.1s;
+      }
+      .w-2 {
+        animation-delay: 0.2s;
+      }
+      .w-3 {
+        animation-delay: 0.3s;
+      }
+      .w-4 {
+        animation-delay: 0.4s;
+      }
+      .w-5 {
+        animation-delay: 0.5s;
+      }
+      .reveal-cascade.is-visible .word {
+        animation: cascadeUp 1.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+      }
+      .sw-1 {
+        animation-delay: 0.1s;
+      }
+      .sw-2 {
+        animation-delay: 0.3s;
+      }
+      .sw-3 {
+        animation-delay: 0.5s;
+      }
+
+      .emerald-dot {
+        color: var(--brand-emerald);
+        display: inline-block;
+        opacity: 0;
+        transform: scale(0);
+        animation: dotPop 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 0.9s;
+      }
+      .hero-description {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        font-weight: 400;
+        color: var(--text-secondary);
+        margin-bottom: 3.5rem;
+        max-width: 550px;
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 0.9s;
+      }
+      .hero-description strong {
+        color: var(--text-primary);
+        font-weight: 600;
+      }
+      .hero-actions {
+        display: flex;
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 1.1s;
+      }
+
+      /* =========================================
+           SCROLL REVEAL UTILITIES
+           ========================================= */
+      .reveal-up {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 1.2s cubic-bezier(0.2, 0.8, 0.2, 1),
+          transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+      .reveal-up.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .delay-0 {
+        transition-delay: 0s;
+      }
+      .delay-1 {
+        transition-delay: 0.15s;
+      }
+      .delay-2 {
+        transition-delay: 0.3s;
+      }
+      .delay-3 {
+        transition-delay: 0.45s;
+      }
+      .delay-4 {
+        transition-delay: 0.6s;
+      }
+
+      @keyframes cascadeUp {
+        0% {
+          transform: translateY(110%);
+          opacity: 0;
+        }
+        100% {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+      @keyframes dotPop {
+        0% {
+          transform: scale(0);
+          opacity: 0;
+        }
+        60% {
+          transform: scale(1.2);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+      @keyframes fadeUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes growLine {
+        to {
+          height: 50%;
+          opacity: 0.6;
+        }
+      }
+      @keyframes cinematicReveal {
+        0% {
+          opacity: 0;
+          filter: brightness(0);
+        }
+        100% {
+          opacity: 1;
+          filter: brightness(1);
+        }
+      }
+      @keyframes slowZoom {
+        0% {
+          transform: scale(1);
+        }
+        100% {
+          transform: scale(1.03);
+        }
+      }
+      @keyframes pulseBounce {
+        0%,
+        100% {
+          transform: translateX(50%) translateY(0) scale(1);
+        }
+        50% {
+          transform: translateX(50%) translateY(-5px) scale(1.03);
+        }
+      }
+
+      /* =========================================
+           TEAM SECTION
+           ========================================= */
+      .team-section {
+        padding: 8rem var(--container-padding);
+        background-color: var(--bg-surface);
+      }
+      .section-header {
+        text-align: center;
+        margin-bottom: 5rem;
+      }
+      .section-kicker {
+        font-size: 0.95rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: var(--brand-emerald);
+        margin-bottom: 1rem;
+        display: block;
+        font-weight: 600;
+      }
+      .section-title {
+        font-size: 3.2rem;
+        font-weight: 400;
+      }
+      .team-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 2.5rem;
+      }
+
+      .team-card {
+        position: relative;
+        width: calc(30% - 1.5rem);
+        min-width: 280px;
+        max-width: 350px;
+        height: 450px;
+        overflow: hidden;
+        border-radius: 4px;
+        cursor: pointer;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      .president-card {
+        width: calc(38% - 1.5rem);
+        min-width: 320px;
+        max-width: 440px;
+        height: 540px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+        z-index: 2;
+      }
+      .order-1 {
+        order: 1;
+      }
+      .order-2 {
+        order: 2;
+      }
+      .order-3 {
+        order: 3;
+      }
+      .order-4 {
+        order: 4;
+      }
+      .order-5 {
+        order: 5;
+      }
+
+      .team-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: var(--transition-smooth);
+        filter: grayscale(40%) brightness(0.8);
+        pointer-events: none;
+      }
+      .card-overlay {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          to top,
+          var(--bg-onyx) 0%,
+          rgba(10, 12, 11, 0.6) 40%,
+          transparent 100%
+        );
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 2.5rem 2rem;
+        transition: var(--transition-smooth);
+      }
+      .doc-name {
+        font-size: 1.6rem;
+        font-weight: 600;
+        margin-bottom: 0.3rem;
+      }
+      .doc-title {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--text-secondary);
+        font-weight: 600;
+        margin-bottom: 0;
+        transition: margin 0.5s ease;
+      }
+
+      .hover-indicator {
+        position: absolute;
+        bottom: 2.5rem;
+        left: 2rem;
+        width: 20px;
+        height: 20px;
+        color: var(--brand-emerald);
+        animation: breatheUp 2s infinite ease-in-out;
+        transition: var(--transition-smooth);
+        opacity: 0.8;
+        pointer-events: none;
+        transform: scaleX(-1);
+      }
+      .hover-indicator svg {
+        width: 100%;
+        height: 100%;
+        stroke: currentColor;
+        stroke-width: 2;
+        fill: none;
+      }
+      @keyframes breatheUp {
+        0%,
+        100% {
+          transform: translateY(0) scaleX(-1);
+        }
+        50% {
+          transform: translateY(-6px) scaleX(-1);
+        }
+      }
+
+      .doc-details {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+      .doc-details-inner {
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(10px);
+        transition: all 0.5s ease;
+      }
+      .doc-desc {
+        font-size: 0.95rem;
+        line-height: 1.7;
+        font-weight: 400;
+        color: var(--text-secondary);
+        margin-top: 1.2rem;
+        margin-bottom: 1.5rem;
+      }
+      .explore-btn {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--brand-emerald);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 600;
+      }
+      .explore-btn::after {
+        content: "←";
+        font-size: 1.2rem;
+        transition: transform 0.3s ease;
+      }
+
+      .team-card:hover img {
+        transform: scale(1.08);
+        filter: grayscale(0%) brightness(1);
+      }
+      .team-card:hover .card-overlay {
+        background: linear-gradient(
+          to top,
+          rgba(10, 12, 11, 0.95) 0%,
+          rgba(10, 12, 11, 0.8) 60%,
+          transparent 100%
+        );
+      }
+      .team-card:hover .doc-title {
+        margin-bottom: 0.5rem;
+        color: #ffffff;
+      }
+      .team-card:hover .doc-details {
+        grid-template-rows: 1fr;
+      }
+      .team-card:hover .doc-details-inner {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .team-card:hover .hover-indicator {
+        opacity: 0;
+        transform: translateY(10px) scaleX(-1);
+      }
+      .team-card:hover .explore-btn::after {
+        transform: translateX(-5px);
+      }
+
+      /* =========================================
+           2x2 CAPABILITIES SHOWCASE (THE LOOKBOOK)
+           ========================================= */
+      .gallery-section {
+        padding: 8rem var(--container-padding);
+        background-color: var(--bg-onyx);
+        position: relative;
+      }
+
+      .showcase-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 5rem 4rem;
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+      .showcase-item {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .interaction-frame {
+        width: 100%;
+        aspect-ratio: 4/3;
+        position: relative;
+        overflow: hidden;
+        border-radius: 4px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .hover-cue-text {
+        position: absolute;
+        bottom: 1.5rem;
+        right: 50%;
+        transform: translateX(50%);
+        font-size: 0.7rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--text-primary);
+        background: rgba(10, 12, 11, 0.7);
+        padding: 8px 16px;
+        border-radius: 30px;
+        font-weight: 600;
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        z-index: 10;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+        animation: pulseBounce 2.5s infinite cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .interaction-frame:hover .hover-cue-text {
+        opacity: 0;
+        animation: none;
+      }
+
+      .case-info-bar {
+        position: relative;
+        margin-top: 1.5rem;
+      }
+      .case-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding-bottom: 12px;
+      }
+      .case-header:hover .case-title {
+        color: var(--brand-emerald);
+      }
+      .case-number {
+        font-size: 0.8rem;
+        color: var(--brand-emerald);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 600;
+      }
+      .case-title {
+        font-size: 1.3rem;
+        font-weight: 500;
+        color: var(--text-primary);
+        flex: 1;
+        margin-right: 1.5rem;
+        transition: 0.3s;
+      }
+      .details-btn {
+        background: none;
+        border: none;
+        color: var(--text-primary);
+        font-size: 1.8rem;
+        font-weight: 300;
+        cursor: pointer;
+        transition: transform 0.4s ease, color 0.4s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .case-details-panel {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+      }
+      .case-info-bar.open .case-details-panel {
+        max-height: 250px;
+      }
+      .case-info-bar.open .details-btn {
+        transform: rotate(45deg);
+        color: var(--brand-emerald);
+      }
+      .case-details-panel p {
+        padding-top: 1.2rem;
+        font-size: 1rem;
+        color: var(--text-secondary);
+        line-height: 1.8;
+        font-weight: 400;
+      }
+
+      /* Interactivity Classes */
+      .comparison-slider {
+        cursor: ew-resize;
+        touch-action: none;
+        user-select: none;
+        -webkit-user-select: none;
+      }
+      .comp-img {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        pointer-events: none;
+        -webkit-user-drag: none;
+      }
+      .after-img {
+        z-index: 1;
+      }
+      /* Polygon goes left to right, we clip from left (0) up to percentage. So in RTL, image covers from left side */
+      .before-img {
+        z-index: 2;
+        clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+        -webkit-clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+      }
+      .slider-handle {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        width: 1px;
+        background-color: var(--text-primary);
+        z-index: 3;
+        transform: translateX(-50%);
+        pointer-events: none;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+      }
+      .slider-button {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        background-color: rgba(10, 12, 11, 0.5);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-primary);
+        transition: var(--transition-smooth);
+        pointer-events: none;
+      }
+      .comparison-slider:hover .slider-button {
+        border-color: var(--brand-emerald);
+        color: var(--brand-emerald);
+        background-color: rgba(10, 12, 11, 0.8);
+        transform: translate(-50%, -50%) scale(1.1);
+      }
+      .slider-button svg {
+        width: 14px;
+        height: 14px;
+        stroke: currentColor;
+        stroke-width: 1.5;
+        fill: none;
+      }
+
+      .spotlight-card {
+        cursor: crosshair;
+      }
+      .spotlight-card img {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        pointer-events: none;
+      }
+      .spotlight-before {
+        z-index: 1;
+      }
+      .spotlight-after {
+        z-index: 2;
+        clip-path: circle(0% at 50% 50%);
+        -webkit-clip-path: circle(0% at 50% 50%);
+        transition: clip-path 0.8s cubic-bezier(0.25, 1, 0.5, 1),
+          -webkit-clip-path 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+      }
+      .spotlight-card:hover .spotlight-after {
+        clip-path: circle(120% at var(--mouse-x, 50%) var(--mouse-y, 50%));
+        -webkit-clip-path: circle(
+          120% at var(--mouse-x, 50%) var(--mouse-y, 50%)
+        );
+      }
+
+      .dissolve-card {
+        cursor: pointer;
+      }
+      .dissolve-card img {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        pointer-events: none;
+        transition: opacity 0.8s ease, transform 1s ease;
+      }
+      .dissolve-before {
+        z-index: 1;
+        filter: grayscale(100%) contrast(1.2);
+      }
+      .dissolve-after {
+        z-index: 2;
+        opacity: 0;
+      }
+      .dissolve-card:hover .dissolve-after {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+      .dissolve-card:hover .dissolve-before {
+        transform: scale(1.05);
+      }
+
+      .editorial-images {
+        cursor: pointer;
+        background: var(--bg-surface);
+        overflow: visible !important;
+        border: none;
+        box-shadow: none;
+      }
+      .editorial-images img {
+        position: absolute;
+        border-radius: 4px;
+        transition: var(--transition-smooth);
+        pointer-events: none;
+        object-fit: cover;
+      }
+      .ed-before {
+        width: 75%;
+        height: 85%;
+        top: 0;
+        right: 0;
+        z-index: 1;
+        filter: grayscale(100%) opacity(0.6);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .ed-after {
+        width: 75%;
+        height: 85%;
+        bottom: 0;
+        left: 0;
+        z-index: 2;
+        box-shadow: 15px -15px 30px rgba(0, 0, 0, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .editorial-images:hover .ed-before {
+        filter: grayscale(0%) opacity(1);
+        transform: scale(0.95) translate(10px, -10px);
+        z-index: 3;
+        box-shadow: -15px 15px 30px rgba(0, 0, 0, 0.6);
+      }
+      .editorial-images:hover .ed-after {
+        transform: scale(1.05) translate(-10px, 10px);
+        z-index: 2;
+        opacity: 0.5;
+      }
+
+      /* =========================================
+           THE CLINIC (STICKY PARALLAX + TIMELINE)
+           ========================================= */
+      .clinic-journey {
+        position: relative;
+        padding: 8rem 0 0 0;
+        background-color: var(--bg-charcoal);
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        overflow: hidden;
+      }
+      .clinic-journey-wrapper {
+        position: relative;
+        max-width: 1300px;
+        margin: 0 auto;
+        padding-right: 5%;
+      }
+
+      .clinic-timeline {
+        position: absolute;
+        right: 2.5%;
+        top: 0;
+        bottom: 0;
+        width: 1px;
+        background: rgba(255, 255, 255, 0.05);
+        z-index: 10;
+        display: block;
+      }
+      .timeline-progress {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        background: var(--brand-emerald);
+        height: 0%;
+        box-shadow: 0 0 15px var(--brand-emerald);
+        transition: height 0.1s ease-out;
+      }
+
+      .clinic-scene {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 5rem;
+        margin: 0 auto 15rem auto;
+        padding: 0 var(--container-padding);
+        position: relative;
+      }
+      .clinic-scene.reverse {
+        flex-direction: row-reverse;
+      }
+
+      .scene-text {
+        flex: 1;
+        position: -webkit-sticky;
+        position: sticky;
+        top: 35vh;
+        max-width: 450px;
+        z-index: 5;
+      }
+
+      .scene-step {
+        font-size: 5rem;
+        font-weight: 200;
+        color: rgba(255, 255, 255, 0.03);
+        position: absolute;
+        top: -3.5rem;
+        right: -2rem;
+        z-index: -1;
+        line-height: 1;
+      }
+      .clinic-scene.reverse .scene-step {
+        right: auto;
+        left: -2rem;
+      }
+      .scene-kicker {
+        font-size: 0.9rem;
+        letter-spacing: 2px;
+        color: var(--brand-emerald);
+        text-transform: uppercase;
+        display: block;
+        margin-bottom: 1rem;
+        font-weight: 600;
+      }
+      .scene-title {
+        font-size: 3.2rem;
+        font-weight: 400;
+        line-height: 1.2;
+        margin-bottom: 1.5rem;
+        color: var(--text-primary);
+      }
+      .scene-desc {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        font-weight: 400;
+        color: var(--text-secondary);
+      }
+
+      .scene-visuals {
+        flex: 1.5;
+        position: relative;
+        width: 100%;
+        min-height: 120vh;
+      }
+      .parallax-layer {
+        position: absolute;
+        border-radius: 4px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        will-change: transform;
+      }
+      .parallax-layer img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 4px;
+        display: block;
+      }
+
+      .sc1-img1 {
+        top: 0;
+        right: 0;
+        width: 85%;
+        height: 600px;
+        z-index: 1;
+      }
+      .sc1-img2 {
+        top: 350px;
+        left: 0;
+        width: 65%;
+        height: 450px;
+        z-index: 2;
+        box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.6);
+      }
+      .sc2-img1 {
+        top: 0;
+        left: 0;
+        width: 75%;
+        height: 500px;
+        z-index: 1;
+      }
+      .sc2-img2 {
+        top: 250px;
+        right: 0;
+        width: 55%;
+        height: 650px;
+        z-index: 2;
+      }
+      .sc2-img3 {
+        top: 600px;
+        left: 10%;
+        width: 40%;
+        height: 350px;
+        z-index: 3;
+      }
+      .sc3-img1 {
+        top: 0;
+        right: 10%;
+        width: 50%;
+        height: 400px;
+        z-index: 2;
+      }
+      .sc3-img2 {
+        top: 150px;
+        left: 0;
+        width: 60%;
+        height: 500px;
+        z-index: 1;
+      }
+      .sc3-img3 {
+        top: 450px;
+        right: 0;
+        width: 45%;
+        height: 600px;
+        z-index: 3;
+      }
+      .sc3-img4 {
+        top: 750px;
+        left: 15%;
+        width: 55%;
+        height: 400px;
+        z-index: 2;
+      }
+
+      .clinic-video-feature {
+        position: relative;
+        width: calc(100% + var(--container-padding) * 2);
+        margin-right: calc(var(--container-padding) * -1);
+        height: 100vh;
+        background: #000;
+        overflow: hidden;
+      }
+      .clinic-video-feature video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.7;
+      }
+      .video-overlay-content {
+        position: absolute;
+        top: 50%;
+        right: 50%;
+        transform: translate(50%, -50%);
+        text-align: center;
+        z-index: 2;
+        width: 100%;
+        padding: 0 20px;
+      }
+      .video-play-btn {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        background: rgba(10, 12, 11, 0.4);
+        backdrop-filter: blur(10px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 2rem auto;
+        color: var(--text-primary);
+        transition: var(--transition-smooth);
+        cursor: pointer;
+      }
+      .video-play-btn:hover {
+        background: var(--brand-emerald);
+        border-color: var(--brand-emerald);
+        transform: scale(1.1);
+      }
+      .video-play-btn svg {
+        width: 24px;
+        height: 24px;
+        fill: currentColor;
+        margin-right: 4px;
+        stroke: none;
+      }
+
+      /* =========================================
+           THE INSTITUTE (B2B COURSES) 
+           ========================================= */
+      .institute-section {
+        padding: 10rem var(--container-padding) 6rem var(--container-padding);
+        background-color: var(--bg-onyx);
+        position: relative;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .inst-intro {
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto 5rem auto;
+      }
+      .inst-intro .scene-title {
+        font-size: 3.8rem;
+      }
+
+      .inst-stats-banner {
+        display: flex;
+        justify-content: center;
+        gap: 6rem;
+        padding: 4rem 0;
+        max-width: 1100px;
+        margin: 0 auto 4rem auto;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        flex-wrap: wrap;
+      }
+      .stat-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .stat-num-wrapper {
+        display: flex;
+        align-items: baseline;
+        margin-bottom: 0.5rem;
+        flex-direction: row-reverse;
+      }
+      .stat-num {
+        font-size: 3.5rem;
+        color: var(--brand-emerald);
+        font-weight: 400;
+        line-height: 1;
+      }
+      .stat-plus {
+        font-size: 2.5rem;
+        color: var(--brand-emerald);
+        font-weight: 300;
+        margin-left: 5px;
+      }
+      .stat-text {
+        font-size: 2.5rem;
+        color: var(--brand-emerald);
+        font-weight: 400;
+        line-height: 1;
+        margin-bottom: 0.5rem;
+        margin-top: 10px;
+      }
+      .stat-label {
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--text-secondary);
+        font-weight: 600;
+      }
+
+      .filmstrip-wrapper {
+        width: calc(100% + var(--container-padding) * 2);
+        margin-right: calc(var(--container-padding) * -1);
+        position: relative;
+        overflow: hidden;
+        padding: 3rem 0;
+        background: var(--bg-charcoal);
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      .filmstrip-track {
+        display: flex;
+        gap: 2rem;
+        width: max-content;
+        animation: scrollFilmstrip 40s linear infinite;
+        will-change: transform;
+      }
+      @media (hover: hover) and (pointer: fine) {
+        .filmstrip-track:hover {
+          animation-play-state: paused;
+          cursor: pointer;
+        }
+      }
+
+      .filmstrip-img {
+        height: 350px;
+        aspect-ratio: 4/3;
+        object-fit: cover;
+        border-radius: 4px;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+        filter: grayscale(30%);
+        transition: var(--transition-smooth);
+      }
+      .filmstrip-img:hover {
+        filter: grayscale(0%);
+        transform: scale(1.02);
+      }
+      @keyframes scrollFilmstrip {
+        0% {
+          transform: translate3d(0, 0, 0);
+        }
+        100% {
+          transform: translate3d(50%, 0, 0);
+        }
+      }
+
+      .curriculum-container {
+        max-width: 1100px;
+        margin: 8rem auto 0 auto;
+      }
+      .curriculum-header {
+        font-size: 2.5rem;
+        font-weight: 400;
+        margin-bottom: 3rem;
+        color: var(--text-primary);
+        text-align: center;
+      }
+      .curriculum-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 3rem;
+      }
+
+      .course-card-premium {
+        background: var(--bg-surface);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 6px;
+        padding: 3rem;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+        transition: var(--transition-smooth);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+      .course-card-premium:hover {
+        transform: translateY(-10px);
+        border-color: rgba(15, 133, 70, 0.3);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+      }
+
+      .course-card-kicker {
+        font-size: 0.8rem;
+        color: var(--brand-emerald);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        display: block;
+      }
+      .course-card-title {
+        font-size: 1.8rem;
+        font-weight: 400;
+        line-height: 1.4;
+        margin-bottom: 1.5rem;
+        color: var(--text-primary);
+      }
+
+      .learning-list {
+        list-style: none;
+        margin-top: 1rem;
+        flex-grow: 1;
+        padding-bottom: 2rem;
+      }
+      .learning-list li {
+        font-size: 1rem;
+        color: var(--text-secondary);
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        font-weight: 400;
+        line-height: 1.6;
+      }
+      .learning-list li::before {
+        content: "←";
+        color: var(--brand-emerald);
+        font-weight: 600;
+      }
+
+      .institute-global-cta {
+        text-align: center;
+        margin-top: 6rem;
+        padding-top: 6rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        max-width: 800px;
+        margin-inline: auto;
+      }
+      .cta-title {
+        font-size: 2.2rem;
+        font-weight: 400;
+        margin-bottom: 1.5rem;
+        color: var(--text-primary);
+      }
+      .cta-desc {
+        color: var(--text-secondary);
+        font-size: 1.1rem;
+        font-weight: 400;
+        line-height: 1.8;
+        margin-bottom: 3rem;
+      }
+      .cta-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+      }
+
+      /* =========================================
+           LOCATION MAP SECTION
+           ========================================= */
+      .location-section {
+        padding: 8rem var(--container-padding);
+        background-color: var(--bg-surface);
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      .map-container {
+        display: flex;
+        flex-direction: row;
+        gap: 4rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        align-items: center;
+      }
+      .map-info {
+        flex: 1;
+        min-width: 300px;
+      }
+      .map-info h3 {
+        font-size: 2.5rem;
+        font-weight: 400;
+        margin-bottom: 1rem;
+        color: var(--text-primary);
+      }
+      .map-info p {
+        color: var(--text-secondary);
+        line-height: 1.8;
+        margin-bottom: 2rem;
+        font-weight: 400;
+        font-size: 1.1rem;
+      }
+
+      .map-frame {
+        flex: 1.5;
+        width: 100%;
+        min-width: 300px;
+        border-radius: 4px;
+        overflow: hidden;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      .map-frame iframe {
+        display: block;
+        width: 100%;
+        height: 450px;
+        border: 0;
+        filter: grayscale(100%) contrast(1.1) opacity(0.8);
+        transition: var(--transition-smooth);
+      }
+      .map-frame iframe:hover {
+        filter: grayscale(0%) contrast(1) opacity(1);
+      }
+
+      /* =========================================
+           LUXURY FOOTER
+           ========================================= */
+      .luxury-footer {
+        background-color: #050606;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        padding: 6rem var(--container-padding) 2rem var(--container-padding);
+        color: var(--text-secondary);
+      }
+      .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 4rem;
+        max-width: 1300px;
+        margin: 0 auto;
+        padding-bottom: 4rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      .footer-col.brand-col {
+        grid-column: span 2;
+      }
+      .footer-col h4 {
+        color: var(--text-primary);
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 2rem;
+        font-weight: 600;
+      }
+      .footer-col ul {
+        list-style: none;
+      }
+      .footer-col ul li {
+        margin-bottom: 1rem;
+        font-size: 0.95rem;
+        font-weight: 400;
+        transition: var(--transition-smooth);
+      }
+      .footer-col ul li a {
+        transition: var(--transition-smooth);
+      }
+      .footer-col ul li a:hover {
+        color: var(--brand-emerald);
+        padding-right: 5px;
+      }
+
+      .brand-col p {
+        font-size: 1rem;
+        line-height: 1.8;
+        font-weight: 400;
+        margin-top: 1.5rem;
+        max-width: 350px;
+      }
+      .footer-logo {
+        height: 80px;
+        object-fit: contain;
+        filter: brightness(0) invert(1);
+        opacity: 0.8;
+        transition: var(--transition-smooth);
+      }
+      .footer-logo:hover {
+        opacity: 1;
+      }
+
+      .footer-socials {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+      }
+      .footer-social-link {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 0.95rem;
+        font-weight: 400;
+        transition: var(--transition-smooth);
+      }
+      .footer-social-link svg {
+        width: 16px;
+        height: 16px;
+        stroke: currentColor;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        fill: none;
+        transition: var(--transition-smooth);
+      }
+      .footer-social-link:hover {
+        color: var(--brand-emerald);
+      }
+
+      .footer-bottom {
+        text-align: center;
+        padding-top: 2rem;
+        font-size: 0.8rem;
+        font-weight: 400;
+        letter-spacing: 1px;
+        color: rgba(255, 255, 255, 0.3);
+      }
+
+      /* =========================================
+           MOBILE / TABLET OPTIMIZATION (FLAWLESS)
+           ========================================= */
+      @media (max-width: 1150px) {
+        .hero-title {
+          font-size: 3.5rem;
+        }
+      }
+
+      @media (max-width: 1024px) {
+        /* Mobile Nav Triggers & Logo Centering */
+        .luxury-nav {
+          justify-content: flex-end;
+        }
+        .nav-brand {
+          position: absolute;
+          right: 50%;
+          transform: translateX(50%);
+          margin-right: 0;
+          width: auto;
+          justify-content: center;
+        }
+        .nav-logo {
+          height: 95px;
+          max-width: 60vw;
+        }
+        .luxury-nav.scrolled .nav-logo {
+          height: 70px;
+        }
+
+        .nav-links-desktop {
+          display: none;
+        }
+        .nav-cta-wrapper {
+          display: none;
+        }
+        .hamburger {
+          display: flex;
+        }
+
+        .showcase-grid {
+          grid-template-columns: 1fr;
+          gap: 4rem;
+        }
+        .clinic-timeline {
+          display: none;
+        }
+        .clinic-journey-wrapper {
+          padding-right: 0;
+        }
+        .clinic-scene,
+        .clinic-scene.reverse {
+          flex-direction: column;
+          gap: 4rem;
+          margin-bottom: 8rem;
+        }
+
+        .scene-text {
+          position: relative;
+          top: 0;
+          max-width: 100%;
+          text-align: center;
+        }
+        .scene-step {
+          right: 50%;
+          transform: translateX(50%);
+          top: -2.5rem;
+        }
+        .clinic-scene.reverse .scene-step {
+          right: 50%;
+          transform: translateX(50%);
+        }
+        .scene-visuals {
+          width: 100%;
+          min-height: 600px;
+        }
+        .inst-stats-banner {
+          flex-direction: column;
+          gap: 3rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        /* Mobile Top Bar Optimizations */
+        .top-bar-item span {
+          display: none;
+        }
+        .social-links {
+          display: none;
+        }
+        .top-bar-left,
+        .top-bar-right {
+          gap: 1rem;
+        }
+        .top-bar-right {
+          display: flex;
+        }
+        .top-bar-item svg {
+          width: 20px;
+          height: 20px;
+        }
+
+        .hero-title {
+          font-size: 3.2rem;
+        }
+        .section-title,
+        .scene-title {
+          font-size: 2.6rem;
+        }
+        .hero-description {
+          font-size: 1.1rem;
+        }
+        .inst-intro .scene-title {
+          font-size: 2.8rem;
+        }
+
+        /* Force Hero Image Behind Text & Reset Padding */
+        .hero-visual {
+          width: 100%;
+          margin: 0;
+          right: 0;
+          left: 0;
+          opacity: 0.4 !important;
+          mask-image: none;
+          -webkit-mask-image: none;
+        }
+        .hero-accent-line {
+          right: 5%;
+        }
+        .hero-content {
+          padding-right: 2rem;
+          margin-right: 3%;
+        }
+
+        .scene-visuals {
+          min-height: auto;
+          display: flex;
+          flex-direction: column;
+          gap: 2rem;
+        }
+        .parallax-layer {
+          position: relative !important;
+          top: 0 !important;
+          left: 0 !important;
+          right: 0 !important;
+          width: 100% !important;
+          height: auto !important;
+          aspect-ratio: 4/3;
+          transform: none !important;
+        }
+
+        .filmstrip-img {
+          height: 250px;
+        }
+        .course-card-premium {
+          padding: 2rem;
+        }
+
+        .map-container {
+          flex-direction: column;
+          gap: 2rem;
+          text-align: center;
+        }
+        .map-frame iframe {
+          height: 300px;
+        }
+
+        .footer-grid {
+          grid-template-columns: 1fr;
+          text-align: center;
+          gap: 3rem;
+        }
+        .footer-col.brand-col {
+          grid-column: span 1;
+        }
+        .brand-col p {
+          margin: 1.5rem auto 0 auto;
+        }
+        .footer-socials {
+          align-items: center;
+        }
+        .footer-col ul li a:hover {
+          padding-right: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <a href="#contact" class="top-bar-item" title="الموقع">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M12 21c-4.418-6.136-7.5-10.377-7.5-13.5A7.5 7.5 0 0 1 12 3a7.5 7.5 0 0 1 7.5 4.5c0 3.123-3.082 7.364-7.5 13.5Z"
+            />
+            <circle cx="12" cy="7.5" r="2.5" />
+          </svg>
+          <span>دينتال جاليري، القاهرة، مصر</span>
+        </a>
+      </div>
+      <div class="top-bar-right">
+        <div class="lang-switcher top-bar-item" title="اللغة">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" />
+            <path
+              d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+            />
+            <path d="M2 12h20" />
+          </svg>
+          <span>عربي</span><span class="divider">|</span><span>EN</span>
+        </div>
+        <div class="social-links">
+          <a
+            href="https://www.facebook.com/miskanderclinic"
+            target="_blank"
+            class="social-icon"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path
+                d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+              ></path>
+            </svg>
+          </a>
+          <a
+            href="https://www.instagram.com/miskanderclinic?igsh=MWoza3ZoNHJqZXhjYw=="
+            target="_blank"
+            class="social-icon"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <nav class="luxury-nav" id="mainNav">
+      <div class="nav-brand">
+        <a href="/"
+          ><img src="images-logo/1.png" alt="شعار" class="nav-logo"
+        /></a>
+      </div>
+
+      <ul class="nav-links-desktop">
+        <li><a href="#expertise">الخبرات</a></li>
+        <li><a href="#dental-gallery">سجل الحالات</a></li>
+        <li><a href="#clinic">العيادة</a></li>
+        <li><a href="#institute">الأكاديمية</a></li>
+      </ul>
+
+      <div class="nav-left">
+        <div class="nav-cta-wrapper">
+          <a href="#contact" class="btn btn-white">احجز استشارتك</a>
+        </div>
+        <button
+          class="hamburger"
+          id="mobile-menu-btn"
+          aria-label="تبديل القائمة"
+        >
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
+    </nav>
+
+    <div class="nav-overlay" id="nav-overlay"></div>
+    <div class="mobile-menu" id="mobile-menu">
+      <div class="mobile-header">
+        <img src="images-logo/1.png" alt="شعار" class="mobile-logo" />
+        <button
+          class="close-btn"
+          id="close-menu-btn"
+          aria-label="إغلاق القائمة"
+        >
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M18 6L6 18M6 6l12 12"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              fill="none"
+            />
+          </svg>
+        </button>
+      </div>
+      <div class="mobile-links">
+        <a href="#expertise" class="mobile-link">الخبرات</a>
+        <a href="#dental-gallery" class="mobile-link">سجل الحالات</a>
+        <a href="#clinic" class="mobile-link">العيادة</a>
+        <a href="#institute" class="mobile-link">الأكاديمية</a>
+      </div>
+      <div class="mobile-footer">
+        <a href="#contact" class="btn btn-emerald w-100" style="width: 100%"
+          >احجز استشارتك</a
+        >
+        <div class="mobile-socials">
+          <a
+            href="https://www.instagram.com/miskanderclinic?igsh=MWoza3ZoNHJqZXhjYw=="
+            target="_blank"
+            ><svg viewBox="0 0 24 24">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg
+          ></a>
+          <a href="https://www.facebook.com/miskanderclinic" target="_blank"
+            ><svg viewBox="0 0 24 24">
+              <path
+                d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+              ></path></svg
+          ></a>
+        </div>
+      </div>
+    </div>
+
+    <header class="hero">
+      <div class="hero-visual">
+        <img src="images-iskandar-hero/1.png" alt="د. مايكل إسكندر" />
+      </div>
+      <div class="hero-accent-line"></div>
+      <div class="hero-content">
+        <span class="hero-kicker"
+          >وجهتك الأولى لطب الأسنان الفاخر في القاهرة</span
+        >
+        <h1 class="hero-title">
+          <span class="word-wrap"><span class="word w-1">إبداع</span></span>
+          <span class="word-wrap"><span class="word w-2">لا يُضاهى</span></span
+          ><br />
+          <strong>
+            <span class="word-wrap"
+              ><span class="word w-3">في طب الأسنان</span></span
+            >
+            <span class="word-wrap"><span class="word w-4">التعويضي</span></span
+            ><span class="emerald-dot">.</span>
+          </strong>
+        </h1>
+        <p class="hero-description">
+          الكمال الجمالي الحقيقي يتطلب
+          <strong>سيمفونية من الخبراء المتخصصين</strong>. تحت القيادة الحكيمة
+          <strong>للدكتور مايكل إسكندر</strong>، يعمل فريقنا متعدد التخصصات على
+          تصميم ابتسامات خالية من العيوب وتدوم طويلاً لمرضانا الأكثر تميزاً.
+        </p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-emerald">تحديد موعد للتقييم</a>
+        </div>
+      </div>
+    </header>
+
+    <section id="expertise" class="team-section">
+      <div class="section-header">
+        <span class="section-kicker reveal-up delay-0">معهد دينتال جاليري</span>
+        <h2 class="section-title reveal-cascade">
+          <span class="word-wrap"><span class="word sw-1">تعرف</span></span>
+          <span class="word-wrap"><span class="word sw-2">على</span></span>
+          <span class="word-wrap"><span class="word sw-3">خبرائنا</span></span>
+        </h2>
+      </div>
+      <div class="team-grid">
+        <div class="team-card order-1 reveal-up delay-2">
+          <img src="images-team/3.JPG" alt="د. عبدالله رضوان" />
+          <div class="card-overlay">
+            <h3 class="doc-name">د. عبدالله رضوان</h3>
+            <p class="doc-title">استشاري تجميل الأسنان</p>
+            <div class="hover-indicator">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M18 15l-6-6-6 6"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  fill="none"
+                />
+              </svg>
+            </div>
+            <div class="doc-details">
+              <div class="doc-details-inner">
+                <p class="doc-desc">
+                  متخصص في تصميم الابتسامات الراقية وتركيبات الفينيرز الدقيقة.
+                </p>
+                <span class="explore-btn">عرض المؤهلات</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="team-card president-card order-2 reveal-up delay-1">
+          <img src="images-team/2.JPG" alt="د. مايكل إسكندر" />
+          <div class="card-overlay">
+            <h3 class="doc-name">د. مايكل إسكندر</h3>
+            <p class="doc-title">زراعة الأسنان وعلاج اللثة</p>
+            <div class="hover-indicator">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M18 15l-6-6-6 6"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  fill="none"
+                />
+              </svg>
+            </div>
+            <div class="doc-details">
+              <div class="doc-details-inner">
+                <p class="doc-desc">
+                  خبير في زراعة الأسنان المعقدة والجراحات الدقيقة للثة.
+                </p>
+                <span class="explore-btn">عرض المؤهلات</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="team-card order-3 reveal-up delay-3">
+          <img src="images-team/4.JPG" alt="د. دينا شاهين" />
+          <div class="card-overlay">
+            <h3 class="doc-name">د. دينا شاهين</h3>
+            <p class="doc-title">أخصائية الاستعاضة السنية</p>
+            <div class="hover-indicator">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M18 15l-6-6-6 6"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  fill="none"
+                />
+              </svg>
+            </div>
+            <div class="doc-details">
+              <div class="doc-details-inner">
+                <p class="doc-desc">
+                  خبيرة في إعادة تأهيل الفم بالكامل والتركيبات المعقدة.
+                </p>
+                <span class="explore-btn">عرض المؤهلات</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="team-card order-4 reveal-up delay-3">
+          <img src="images-team/5.JPG" alt="د. آية حمدتو" />
+          <div class="card-overlay">
+            <h3 class="doc-name">د. آية حمدتو</h3>
+            <p class="doc-title">أخصائية العلاج التحفظي</p>
+            <div class="hover-indicator">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M18 15l-6-6-6 6"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  fill="none"
+                />
+              </svg>
+            </div>
+            <div class="doc-details">
+              <div class="doc-details-inner">
+                <p class="doc-desc">
+                  مكرسة لطب الأسنان المحاكي للطبيعة والحفاظ على بنية الأسنان.
+                </p>
+                <span class="explore-btn">عرض المؤهلات</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="team-card order-5 reveal-up delay-4">
+          <img src="images-team/6.JPG" alt="د. مراد مورس" />
+          <div class="card-overlay">
+            <h3 class="doc-name">د. مراد مورس</h3>
+            <p class="doc-title">أخصائي العلاج التحفظي</p>
+            <div class="hover-indicator">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M18 15l-6-6-6 6"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  fill="none"
+                />
+              </svg>
+            </div>
+            <div class="doc-details">
+              <div class="doc-details-inner">
+                <p class="doc-desc">
+                  اهتمام دقيق بالتفاصيل في العلاجات التحفظية عالية الدقة.
+                </p>
+                <span class="explore-btn">عرض المؤهلات</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="global-cta-wrapper reveal-up delay-2">
+        <a href="#contact" class="btn btn-white">استشر خبرائنا</a>
+      </div>
+    </section>
+
+    <section id="dental-gallery" class="gallery-section">
+      <div class="section-header">
+        <span class="section-kicker reveal-up delay-0">إمكانياتنا</span>
+        <h2 class="section-title reveal-cascade" style="margin-bottom: 2rem">
+          <span class="word-wrap"><span class="word sw-1">سجل</span></span>
+          <span class="word-wrap"><span class="word sw-2">الحالات</span></span>
+        </h2>
+      </div>
+
+      <div class="showcase-grid">
+        <div class="showcase-item reveal-up delay-1">
+          <div class="interaction-frame comparison-slider" id="compare-slider">
+            <img src="Images-Patients/2.webp" class="comp-img after-img" />
+            <img src="Images-Patients/1.webp" class="comp-img before-img" />
+            <div class="slider-handle" id="slider-handle">
+              <div class="slider-button">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M15 18l-6-6 6-6"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    fill="none"
+                  />
+                  <path
+                    d="M9 18l6-6-6-6"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    fill="none"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div class="hover-cue-text">[ &rarr; اسحب للمقارنة &larr; ]</div>
+          </div>
+
+          <div class="case-info-bar">
+            <div class="case-header">
+              <div>
+                <span class="case-number">حالة 01</span
+                ><span class="case-title">إعادة التأهيل بالخزف</span>
+              </div>
+              <button class="details-btn">+</button>
+            </div>
+            <div class="case-details-panel">
+              <p>
+                استعادة البعد العمودي ومعالجة التآكل الشديد للأسنان باستخدام
+                الفينيرز الخزفية فائقة الرقة للحصول على ابتسامة طبيعية متألقة
+                وهيكل سليم.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="showcase-item reveal-up delay-2">
+          <div class="interaction-frame spotlight-card">
+            <img src="Images-Patients/7.webp" class="spotlight-before" />
+            <img src="Images-Patients/8.webp" class="spotlight-after" />
+            <div class="hover-cue-text">[ ⌕ مرر للاستكشاف ]</div>
+          </div>
+
+          <div class="case-info-bar">
+            <div class="case-header">
+              <div>
+                <span class="case-number">حالة 04</span
+                ><span class="case-title">تشكيل اللثة وتركيبات E-Max</span>
+              </div>
+              <button class="details-btn">+</button>
+            </div>
+            <div class="case-details-panel">
+              <p>
+                تسوية اللثة بالليزر مع تيجان E-Max المخصصة للتخلص من الابتسامة
+                اللثوية وتحقيق تناسق الوجه المثالي.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="showcase-item reveal-up delay-1">
+          <div class="interaction-frame dissolve-card">
+            <img src="Images-Patients/3.webp" class="dissolve-before" />
+            <img src="Images-Patients/4.webp" class="dissolve-after" />
+            <div class="hover-cue-text">[ ☼ مرر للعرض ]</div>
+          </div>
+
+          <div class="case-info-bar">
+            <div class="case-header">
+              <div>
+                <span class="case-number">حالة 02</span
+                ><span class="case-title">إعادة التصميم التجميلي الأمامي</span>
+              </div>
+              <button class="details-btn">+</button>
+            </div>
+            <div class="case-details-panel">
+              <p>
+                إغلاق الفراغات وإخفاء التصبغات العميقة باستخدام تقنيات الربط
+                طفيفة التوغل لتحقيق قوس سني متناغم.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="showcase-item reveal-up delay-2">
+          <div class="interaction-frame editorial-images">
+            <img src="Images-Patients/30.webp" class="ed-before" />
+            <img src="Images-Patients/31.webp" class="ed-after" />
+            <div class="hover-cue-text" style="z-index: 10">
+              [ ⤢ مرر للتكبير ]
+            </div>
+          </div>
+
+          <div class="case-info-bar">
+            <div class="case-header">
+              <div>
+                <span class="case-number">حالة 06</span
+                ><span class="case-title">تجميل الابتسامة بالكامل</span>
+              </div>
+              <button class="details-btn">+</button>
+            </div>
+            <div class="case-details-panel">
+              <p>
+                تحول شامل لمعالجة الاختلالات الهيكلية العميقة وتدرج الألوان، مما
+                يوفر جمالية مشرقة تتحدى الزمن.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="global-cta-wrapper reveal-up delay-2">
+        <a href="#contact" class="btn btn-emerald">ابدأ رحلة التغيير</a>
+      </div>
+    </section>
+
+    <section id="clinic" class="clinic-journey">
+      <div class="clinic-journey-wrapper">
+        <div class="clinic-timeline">
+          <div class="timeline-progress" id="clinic-timeline-progress"></div>
+        </div>
+
+        <div class="clinic-scene">
+          <div class="scene-text reveal-up">
+            <div class="scene-step">01</div>
+            <span class="scene-kicker">البيئة المحيطة</span>
+            <h2 class="scene-title reveal-cascade">
+              <span class="word-wrap"><span class="word sw-1">لحظة</span></span>
+              <span class="word-wrap"
+                ><span class="word sw-2">الوصول.</span></span
+              >
+            </h2>
+            <p class="scene-desc">
+              ادخل إلى مساحة صُممت هندسياً للقضاء على التوتر السريري. منذ لحظة
+              وصولك، تهيئ صالتنا المخصصة أجواءً من الصفاء المطلق والرفاهية التي
+              لا تضاهى قبل بدء علاجك.
+            </p>
+          </div>
+          <div class="scene-visuals">
+            <div class="parallax-layer sc1-img1" data-speed="0.08">
+              <img
+                src="images-clinic/1.JPG"
+                alt="Clinic Reception"
+                onerror="this.src='https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1000&q=80'"
+              />
+            </div>
+            <div class="parallax-layer sc1-img2" data-speed="-0.15">
+              <img
+                src="images-clinic/2.JPG"
+                alt="Patient Lounge"
+                onerror="this.src='https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80'"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="clinic-scene reverse">
+          <div class="scene-text reveal-up">
+            <div class="scene-step" style="right: auto; left: -2rem">02</div>
+            <span class="scene-kicker">العلاج</span>
+            <h2 class="scene-title reveal-cascade">
+              <span class="word-wrap"
+                ><span class="word sw-1">العيادات</span></span
+              >
+              <span class="word-wrap"
+                ><span class="word sw-2">المجهزة.</span></span
+              >
+            </h2>
+            <p class="scene-desc">
+              أجنحة علاج خاصة ومزودة بأحدث التقنيات. تم تحسين كل التفاصيل، من
+              الإضاءة إلى المقاعد المريحة، لتوفير راحتك المطلقة ولدعم دقة
+              أطبائنا الفائقة.
+            </p>
+          </div>
+          <div class="scene-visuals">
+            <div class="parallax-layer sc2-img1" data-speed="-0.05">
+              <img
+                src="images-clinic/3.JPG"
+                alt="Treatment Room"
+                onerror="this.src='https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=1000&q=80'"
+              />
+            </div>
+            <div class="parallax-layer sc2-img2" data-speed="0.12">
+              <img
+                src="images-clinic/4.JPG"
+                alt="Dental Chair"
+                onerror="this.src='https://images.unsplash.com/photo-1536849460588-69f4fa1a7b10?auto=format&fit=crop&w=800&q=80'"
+              />
+            </div>
+            <div class="parallax-layer sc2-img3" data-speed="-0.08">
+              <img
+                src="images-clinic/5.JPG"
+                alt="Clinic Details"
+                onerror="this.src='https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=80'"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="clinic-scene">
+          <div class="scene-text reveal-up">
+            <div class="scene-step">03</div>
+            <span class="scene-kicker">الإتقان الداخلي</span>
+            <h2 class="scene-title reveal-cascade">
+              <span class="word-wrap"
+                ><span class="word sw-1">تكنولوجيا</span></span
+              ><br />
+              <span class="word-wrap"
+                ><span class="word sw-2">لا تضاهى.</span></span
+              >
+            </h2>
+            <p class="scene-desc">
+              الرفاهية الحقيقية تكمن في الراحة. بفضل مراكز التصوير ثلاثي الأبعاد
+              الخاصة بنا، والأشعة السينية، وآلات الطحن الرقمية المتقدمة، يتم
+              تنفيذ إعادة تأهيلك بالكامل بامتياز تحت سقف واحد. لا تحويلات. لا
+              انتظار.
+            </p>
+          </div>
+          <div class="scene-visuals" style="min-height: 1200px">
+            <div class="parallax-layer sc3-img1" data-speed="0.06">
+              <img
+                src="images-clinic/6.JPG"
+                alt="3D Imaging"
+                onerror="this.src='https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=800&q=80'"
+              />
+            </div>
+            <div class="parallax-layer sc3-img2" data-speed="-0.1">
+              <img
+                src="images-clinic/7.JPG"
+                alt="X-Ray Machine"
+                onerror="this.src='https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=800&q=80'"
+              />
+            </div>
+            <div class="parallax-layer sc3-img3" data-speed="0.15">
+              <img
+                src="images-clinic/8.JPG"
+                alt="Lab Equipment"
+                onerror="this.src='https://images.unsplash.com/photo-1583324113626-70df0f4deaab?auto=format&fit=crop&w=800&q=80'"
+              />
+            </div>
+            <div class="parallax-layer sc3-img4" data-speed="-0.05">
+              <img
+                src="images-clinic/9.JPG"
+                alt="Digital Milling"
+                onerror="this.src='https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=800&q=80'"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="clinic-video-feature reveal-up">
+        <video
+          autoplay
+          loop
+          muted
+          playsinline
+          src="images-clinic/10.mp4"
+        ></video>
+        <div class="video-overlay-content">
+          <div class="video-play-btn">
+            <svg
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="1.5"
+              fill="none"
+            >
+              <path d="M8 5v14l11-7z" fill="currentColor" />
+            </svg>
+          </div>
+          <h2 class="scene-title" style="margin-bottom: 0">
+            اختبر تجربة جاليري.
+          </h2>
+        </div>
+      </div>
+
+      <div class="global-cta-wrapper reveal-up delay-2" style="padding: 4rem 0">
+        <a href="#contact" class="btn btn-white">احجز تجربتك الآن</a>
+      </div>
+    </section>
+
+    <section id="institute" class="institute-section">
+      <div class="inst-intro reveal-up">
+        <span
+          class="section-kicker"
+          style="
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--brand-emerald);
+            display: block;
+            font-weight: 600;
+          "
+          >المؤسس والمدير التنفيذي</span
+        >
+        <h2
+          class="scene-title reveal-cascade"
+          style="
+            font-weight: 300;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+          "
+        >
+          <span class="word-wrap"><span class="word sw-1">معهد</span></span>
+          <span class="word-wrap"><span class="word sw-2">دينتال</span></span>
+          <span class="word-wrap"><span class="word sw-3">جاليري.</span></span>
+        </h2>
+      </div>
+
+      <div class="inst-stats-banner reveal-up delay-1">
+        <div class="stat-box">
+          <div class="stat-num-wrapper">
+            <span class="stat-num" data-target="15">0</span
+            ><span class="stat-plus">+</span>
+          </div>
+          <span class="stat-label">سنوات من التميز</span>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num-wrapper">
+            <span class="stat-num" data-target="5000">0</span
+            ><span class="stat-plus">+</span>
+          </div>
+          <span class="stat-label">حالة تم علاجها</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-text">عالمياً</span>
+          <span class="stat-label">محاضرات ودورات متقدمة</span>
+        </div>
+      </div>
+
+      <div class="filmstrip-wrapper reveal-up delay-2">
+        <div class="filmstrip-track">
+          <img
+            src="Dental-Gallery-Micheal/IMG_5683.jpg"
+            class="filmstrip-img"
+          />
+          <img src="Dental-Gallery-Micheal/1.JPG" class="filmstrip-img" />
+          <img src="Dental-Gallery-Micheal/2.JPG" class="filmstrip-img" />
+          <img src="Dental-Gallery-Micheal/3.JPG" class="filmstrip-img" />
+          <img src="Dental-Gallery-Micheal/4.JPG" class="filmstrip-img" />
+          <img src="Dental-Gallery-Micheal/5.JPG" class="filmstrip-img" />
+          <img src="Dental-Gallery-Micheal/6.JPG" class="filmstrip-img" />
+          <img src="Dental-Gallery-Micheal/7.JPG" class="filmstrip-img" />
+          <img src="Dental-Gallery-Micheal/8.JPG" class="filmstrip-img" />
+
+          <img
+            src="Dental-Gallery-Micheal/IMG_5683.jpg"
+            class="filmstrip-img"
+          />
+          <img src="Dental-Gallery-Micheal/1.JPG" class="filmstrip-img" />
+          <img src="Dental-Gallery-Micheal/2.JPG" class="filmstrip-img" />
+          <img src="Dental-Gallery-Micheal/3.JPG" class="filmstrip-img" />
+          <img src="Dental-Gallery-Micheal/4.JPG" class="filmstrip-img" />
+          <img src="Dental-Gallery-Micheal/5.JPG" class="filmstrip-img" />
+          <img src="Dental-Gallery-Micheal/6.JPG" class="filmstrip-img" />
+          <img src="Dental-Gallery-Micheal/7.JPG" class="filmstrip-img" />
+          <img src="Dental-Gallery-Micheal/8.JPG" class="filmstrip-img" />
+        </div>
+      </div>
+
+      <div class="curriculum-container">
+        <h3 class="curriculum-header reveal-up delay-0">
+          الدورات التدريبية المتقدمة
+        </h3>
+
+        <div class="curriculum-grid">
+          <div class="course-card-premium reveal-up delay-1">
+            <span class="course-card-kicker">المنهج — الوحدة 01</span>
+            <h4 class="course-card-title">زراعة الأسنان وعلاج اللثة المتقدم</h4>
+            <ul class="learning-list">
+              <li>هندسة الأنسجة الرخوة وتصميم الشرائح</li>
+              <li>بروتوكولات زراعة العظام المضمونة</li>
+              <li>استراتيجيات الزراعة والتحميل الفوري</li>
+              <li>إدارة المضاعفات الجراحية</li>
+            </ul>
+          </div>
+
+          <div class="course-card-premium reveal-up delay-2">
+            <span class="course-card-kicker">المنهج — الوحدة 02</span>
+            <h4 class="course-card-title">الاستعاضة السنية الشاملة</h4>
+            <ul class="learning-list">
+              <li>إتقان مركز الدوران (COR)</li>
+              <li>تعديلات البعد العمودي (VDO)</li>
+              <li>نقل القوس الوجهي وتركيب المفصل (Articulator)</li>
+              <li>إعادة التأهيل المعقدة لكامل الفك</li>
+            </ul>
+          </div>
+
+          <div class="course-card-premium reveal-up delay-1">
+            <span class="course-card-kicker">المنهج — الوحدة 03</span>
+            <h4 class="course-card-title">
+              تجميل الأسنان الأمامية المحاكي للطبيعة
+            </h4>
+            <ul class="learning-list">
+              <li>عزل السد المطاطي المتقدم</li>
+              <li>تحضيرات الفينير الخزفية فائقة الرقة</li>
+              <li>بروتوكولات الربط اللاصق الخالية من العيوب</li>
+              <li>الديناميكيات البصرية ومطابقة الألوان</li>
+            </ul>
+          </div>
+
+          <div class="course-card-premium reveal-up delay-2">
+            <span class="course-card-kicker">التوجيه التنفيذي</span>
+            <h4 class="course-card-title">إدارة عيادات الأسنان النخبوية</h4>
+            <ul class="learning-list">
+              <li>الانتقال إلى العلامة التجارية المتميزة</li>
+              <li>إتقان تقديم خطط العلاج بفعالية</li>
+              <li>استراتيجيات قبول الحالات عالية القيمة</li>
+              <li>كفاءة سير العمل السريري وتفويض المهام</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="institute-global-cta reveal-up">
+          <h3 class="cta-title">التسجيل القادم والتحديثات المباشرة</h3>
+          <p class="cta-desc">
+            تابع معهد دينتال جاليري للتدريب عبر قنواتنا على وسائل التواصل
+            الاجتماعي لتلقي إعلانات حصرية حول مواعيد الدورات القادمة، وعروض
+            الجراحات الحية، والرؤى السريرية من د. مايكل إسكندر.
+          </p>
+          <div class="cta-buttons">
+            <a
+              href="https://www.instagram.com/dentalgallerytraininginstitute?igsh=b3dpbWNlNzdxNHAw"
+              target="_blank"
+              class="btn btn-emerald"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path
+                  d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
+                ></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+              إنستجرام
+            </a>
+            <a
+              href="https://www.facebook.com/share/18WfnTrYT1/?mibextid=wwXIfr"
+              target="_blank"
+              class="btn btn-white"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path
+                  d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+                ></path>
+              </svg>
+              فيسبوك
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="location-section">
+      <div class="section-header reveal-up delay-0">
+        <span class="section-kicker">قم بزيارتنا</span>
+        <h2 class="section-title reveal-cascade" style="margin-bottom: 4rem">
+          <span class="word-wrap"><span class="word sw-1">موقعنا.</span></span>
+        </h2>
+      </div>
+
+      <div class="map-container reveal-up delay-1">
+        <div class="map-info">
+          <h3>دينتال جاليري</h3>
+          <p>
+            رعاية أسنان ممتازة ومعهد تدريبي<br />
+            القاهرة، مصر
+          </p>
+          <a href="#contact" class="btn btn-emerald">احجز استشارتك</a>
+        </div>
+
+        <div class="map-frame">
+          <iframe
+            src="https://www.google.com/maps/embed"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+
+    <footer class="luxury-footer">
+      <div class="footer-grid">
+        <div class="footer-col brand-col">
+          <img
+            src="images-logo/1.png"
+            alt="شعار دينتال جاليري"
+            class="footer-logo"
+          />
+          <p>
+            قمة طب الأسنان الحديث والتعليم التعويضي. تصميم ابتسامات خالية من
+            العيوب وتدوم طويلاً في القاهرة، مصر.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>التنقل</h4>
+          <ul>
+            <li><a href="#expertise">الخبرات</a></li>
+            <li><a href="#dental-gallery">سجل الحالات</a></li>
+            <li><a href="#clinic">العيادة</a></li>
+            <li><a href="#institute">الأكاديمية</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>تواصل معنا</h4>
+          <div class="footer-socials">
+            <a
+              href="https://www.instagram.com/miskanderclinic?igsh=MWoza3ZoNHJqZXhjYw=="
+              target="_blank"
+              class="footer-social-link"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path
+                  d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
+                ></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+              إنستجرام العيادة
+            </a>
+            <a
+              href="https://www.facebook.com/miskanderclinic"
+              target="_blank"
+              class="footer-social-link"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path
+                  d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+                ></path>
+              </svg>
+              فيسبوك العيادة
+            </a>
+            <a
+              href="https://www.instagram.com/dentalgallerytraininginstitute?igsh=b3dpbWNlNzdxNHAw"
+              target="_blank"
+              class="footer-social-link"
+              style="margin-top: 0.5rem"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path
+                  d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
+                ></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+              إنستجرام المعهد
+            </a>
+            <a
+              href="https://www.facebook.com/share/18WfnTrYT1/?mibextid=wwXIfr"
+              target="_blank"
+              class="footer-social-link"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path
+                  d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+                ></path>
+              </svg>
+              فيسبوك المعهد
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 د. مايكل إسكندر | معهد دينتال جاليري. جميع الحقوق محفوظة.</p>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        /* --- 1. Sticky Nav Logic --- */
+        const nav = document.getElementById("mainNav");
+        window.addEventListener("scroll", () => {
+          if (window.scrollY > 50) {
+            nav.classList.add("scrolled");
+          } else {
+            nav.classList.remove("scrolled");
+          }
+        });
+
+        /* --- 1.b Mobile Hamburger Menu Logic --- */
+        const hamburgerBtn = document.getElementById("mobile-menu-btn");
+        const mobileMenu = document.getElementById("mobile-menu");
+        const navOverlay = document.getElementById("nav-overlay");
+        const closeMenuBtn = document.getElementById("close-menu-btn");
+        const mobileLinks = mobileMenu.querySelectorAll("a");
+
+        function toggleMobileMenu() {
+          mobileMenu.classList.toggle("active");
+          navOverlay.classList.toggle("active");
+          document.body.style.overflow = mobileMenu.classList.contains("active")
+            ? "hidden"
+            : "";
+        }
+
+        if (hamburgerBtn)
+          hamburgerBtn.addEventListener("click", toggleMobileMenu);
+        if (closeMenuBtn)
+          closeMenuBtn.addEventListener("click", toggleMobileMenu);
+        if (navOverlay) navOverlay.addEventListener("click", toggleMobileMenu);
+
+        mobileLinks.forEach((link) => {
+          link.addEventListener("click", () => {
+            mobileMenu.classList.remove("active");
+            navOverlay.classList.remove("active");
+            document.body.style.overflow = "";
+          });
+        });
+
+        /* --- 2. Scroll Reveal Observer --- */
+        const observerOptions = {
+          root: null,
+          rootMargin: "0px 0px -15% 0px",
+          threshold: 0.1,
+        };
+        const observer = new IntersectionObserver((entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        }, observerOptions);
+        document
+          .querySelectorAll(".reveal-up, .reveal-cascade")
+          .forEach((element) => {
+            observer.observe(element);
+          });
+
+        /* --- 3. Interactive Drag-to-Reveal --- */
+        const slider = document.getElementById("compare-slider");
+        if (slider) {
+          const handle = document.getElementById("slider-handle");
+          const beforeImg = slider.querySelector(".before-img");
+          let isDragging = false;
+
+          const moveSlider = (e) => {
+            if (!isDragging) return;
+            const rect = slider.getBoundingClientRect();
+            // In RTL, the calculation remains conceptually similar since the clip-path coordinates are still LTR polygon
+            let x = e.clientX - rect.left;
+            if (e.type.includes("touch")) x = e.touches[0].clientX - rect.left;
+            x = Math.max(0, Math.min(x, rect.width));
+            const percentage = (x / rect.width) * 100;
+
+            handle.style.left = `${percentage}%`;
+            beforeImg.style.clipPath = `polygon(0 0, ${percentage}% 0, ${percentage}% 100%, 0 100%)`;
+            beforeImg.style.webkitClipPath = `polygon(0 0, ${percentage}% 0, ${percentage}% 100%, 0 100%)`;
+          };
+
+          slider.addEventListener("mousedown", () => {
+            isDragging = true;
+          });
+          window.addEventListener("mouseup", () => (isDragging = false));
+          window.addEventListener("mousemove", moveSlider);
+
+          slider.addEventListener(
+            "touchstart",
+            () => {
+              isDragging = true;
+            },
+            { passive: true }
+          );
+          window.addEventListener("touchend", () => (isDragging = false));
+          window.addEventListener("touchmove", moveSlider, { passive: true });
+        }
+
+        /* --- 4. Spotlight Mouse Tracking --- */
+        const spotlight = document.querySelector(".spotlight-card");
+        if (spotlight) {
+          spotlight.addEventListener("mousemove", (e) => {
+            const rect = e.currentTarget.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            e.currentTarget.style.setProperty("--mouse-x", `${x}%`);
+            e.currentTarget.style.setProperty("--mouse-y", `${y}%`);
+          });
+        }
+
+        /* --- 5. Case Details Accordion Toggle --- */
+        const infoHeaders = document.querySelectorAll(".case-header");
+        infoHeaders.forEach((header) => {
+          header.addEventListener("click", () => {
+            const parentBar = header.parentElement;
+            parentBar.classList.toggle("open");
+          });
+        });
+
+        /* --- 6. Cinematic Parallax Scroll Logic --- */
+        let ticking = false;
+        window.addEventListener("scroll", () => {
+          if (!ticking && window.innerWidth > 768) {
+            window.requestAnimationFrame(() => {
+              document.querySelectorAll(".parallax-layer").forEach((el) => {
+                const parentRect = el.parentElement.getBoundingClientRect();
+                const speed = parseFloat(el.getAttribute("data-speed")) || 0.1;
+                const centerDiff =
+                  window.innerHeight / 2 -
+                  (parentRect.top + parentRect.height / 2);
+                el.style.transform = `translateY(${centerDiff * speed}px)`;
+              });
+              ticking = false;
+            });
+            ticking = true;
+          }
+        });
+
+        /* --- 7. Timeline Scroll Progress --- */
+        const clinicSection = document.querySelector(".clinic-journey-wrapper");
+        const progressBar = document.getElementById("clinic-timeline-progress");
+
+        if (clinicSection && progressBar) {
+          window.addEventListener("scroll", () => {
+            const rect = clinicSection.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            const totalScroll = rect.height;
+            const currentScroll = windowHeight / 2 - rect.top;
+
+            let progress = (currentScroll / totalScroll) * 100;
+            progress = Math.max(0, Math.min(progress, 100));
+
+            progressBar.style.height = `${progress}%`;
+          });
+        }
+
+        /* --- 8. Live Number Counter for Stats --- */
+        const statNums = document.querySelectorAll(".stat-num[data-target]");
+        const statObserver = new IntersectionObserver(
+          (entries, obs) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const target = parseInt(
+                  entry.target.getAttribute("data-target")
+                );
+                const duration = 2000;
+                const step = target / (duration / 16);
+                let current = 0;
+
+                const updateNum = () => {
+                  current += step;
+                  if (current < target) {
+                    entry.target.innerText =
+                      Math.ceil(current).toLocaleString("ar-EG"); // Arabic formatting
+                    requestAnimationFrame(updateNum);
+                  } else {
+                    entry.target.innerText = target.toLocaleString("ar-EG");
+                  }
+                };
+                updateNum();
+                obs.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.5 }
+        );
+
+        statNums.forEach((num) => statObserver.observe(num));
+      });
+    </script>
+  </body>
+</html>
