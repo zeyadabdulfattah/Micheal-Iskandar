@@ -38,14 +38,13 @@
         box-sizing: border-box;
       }
 
+      /* Removed overflow clipping so position: sticky works flawlessly */
       html,
       body {
         background-color: var(--bg-onyx);
         color: var(--text-primary);
         font-family: var(--font-main);
         -webkit-font-smoothing: antialiased;
-        /* CRITICAL: Prevents horizontal scrolling glitches */
-        overflow-x: hidden;
         width: 100%;
       }
 
@@ -55,7 +54,7 @@
       }
 
       /* =========================================
-           GLOBAL BUTTONS & CTA WRAPPERS
+           GLOBAL CTA WRAPPER
            ========================================= */
       .global-cta-wrapper {
         display: flex;
@@ -84,7 +83,11 @@
       .btn svg {
         width: 16px;
         height: 16px;
-        fill: currentColor;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
       }
       .btn-white {
         background: transparent;
@@ -151,10 +154,14 @@
         stroke-width: 1.5;
         fill: none;
         color: var(--brand-emerald);
+        transition: var(--transition-smooth);
       }
       .lang-switcher .divider {
         color: rgba(255, 255, 255, 0.2);
         margin: 0 6px;
+      }
+      .lang-switcher span {
+        transition: var(--transition-smooth);
       }
       .lang-switcher span:hover {
         color: var(--brand-emerald);
@@ -181,7 +188,7 @@
       }
 
       /* =========================================
-           REBUILT: LUXURY DESKTOP NAVIGATION
+           DESKTOP NAVIGATION
            ========================================= */
       .luxury-nav {
         position: fixed;
@@ -196,7 +203,6 @@
         z-index: 1000;
         transition: var(--transition-smooth);
       }
-
       .luxury-nav.scrolled {
         background: rgba(10, 12, 11, 0.95);
         backdrop-filter: blur(20px);
@@ -204,16 +210,17 @@
         border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         height: 90px;
       }
-
-      /* Logo (Left) */
       .nav-brand {
         z-index: 1001;
         display: flex;
         align-items: center;
+        margin-left: -50px;
+        transition: var(--transition-smooth);
       }
       .nav-logo {
         height: 90px;
         width: auto;
+        max-width: 25vw;
         object-fit: contain;
         transition: var(--transition-smooth);
       }
@@ -224,8 +231,7 @@
         opacity: 0.8;
       }
 
-      /* Links (Perfectly Centered via Absolute Positioning) */
-      .nav-links {
+      .nav-links-desktop {
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
@@ -236,7 +242,7 @@
         margin: 0;
         padding: 0;
       }
-      .nav-links li a {
+      .nav-links-desktop li a {
         font-size: 0.8rem;
         text-transform: uppercase;
         letter-spacing: 2px;
@@ -245,7 +251,7 @@
         transition: var(--transition-smooth);
         color: var(--text-primary);
       }
-      .nav-links li a::after {
+      .nav-links-desktop li a::after {
         content: "";
         position: absolute;
         width: 0;
@@ -255,22 +261,19 @@
         background-color: var(--brand-emerald);
         transition: var(--transition-smooth);
       }
-      .nav-links li a:hover {
+      .nav-links-desktop li a:hover {
         color: var(--brand-emerald);
       }
-      .nav-links li a:hover::after {
+      .nav-links-desktop li a:hover::after {
         width: 100%;
       }
 
-      /* Actions (Right) */
       .nav-right {
         display: flex;
         align-items: center;
         gap: 2rem;
         z-index: 1001;
       }
-
-      /* Hamburger (Hidden on Desktop) */
       .hamburger {
         display: none;
         flex-direction: column;
@@ -290,13 +293,13 @@
       }
 
       /* =========================================
-           NEW: PREMIUM OFF-CANVAS MOBILE MENU
+           OFF-CANVAS MOBILE MENU
            ========================================= */
       .nav-overlay {
         position: fixed;
         top: 0;
         left: 0;
-        width: 100vw;
+        width: 100%;
         height: 100vh;
         background: rgba(0, 0, 0, 0.7);
         backdrop-filter: blur(8px);
@@ -312,14 +315,14 @@
         visibility: visible;
       }
 
-      .offcanvas-menu {
+      .mobile-menu {
         position: fixed;
         top: 0;
         right: -100%;
-        width: 400px;
-        max-width: 100vw;
+        width: 350px;
+        max-width: 100%;
         height: 100vh;
-        background: var(--bg-onyx);
+        background: var(--bg-charcoal);
         border-left: 1px solid rgba(255, 255, 255, 0.05);
         z-index: 1051;
         display: flex;
@@ -329,18 +332,18 @@
         box-shadow: -20px 0 50px rgba(0, 0, 0, 0.7);
         overflow-y: auto;
       }
-      .offcanvas-menu.active {
+      .mobile-menu.active {
         right: 0;
       }
 
-      .offcanvas-header {
+      .mobile-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
         margin-bottom: 4rem;
       }
-      .offcanvas-logo {
-        height: 60px;
+      .mobile-logo {
+        height: 50px;
         object-fit: contain;
       }
       .close-btn {
@@ -362,30 +365,32 @@
       .close-btn svg {
         width: 28px;
         height: 28px;
+        stroke: currentColor;
+        stroke-width: 1.5;
+        stroke-linecap: round;
+        fill: none;
       }
 
-      .offcanvas-links {
-        list-style: none;
+      .mobile-links {
         display: flex;
         flex-direction: column;
         gap: 2rem;
         margin-bottom: auto;
       }
-      .offcanvas-link {
+      .mobile-link {
         font-size: 1.4rem;
         font-weight: 300;
         text-transform: uppercase;
         letter-spacing: 3px;
         color: var(--text-primary);
         transition: 0.3s ease;
-        display: inline-block;
       }
-      .offcanvas-link:hover {
+      .mobile-link:hover {
         color: var(--brand-emerald);
         transform: translateX(10px);
       }
 
-      .offcanvas-footer {
+      .mobile-footer {
         display: flex;
         flex-direction: column;
         gap: 2rem;
@@ -393,28 +398,27 @@
         border-top: 1px solid rgba(255, 255, 255, 0.05);
         margin-top: 3rem;
       }
-      .w-100 {
-        width: 100%;
-        text-align: center;
-      }
-      .offcanvas-socials {
+      .mobile-socials {
         display: flex;
         gap: 1.5rem;
+        justify-content: center;
       }
-      .offcanvas-socials a {
+      .mobile-socials a {
         color: var(--text-primary);
         transition: 0.3s ease;
       }
-      .offcanvas-socials a:hover {
+      .mobile-socials a:hover {
         color: var(--brand-emerald);
         transform: translateY(-3px);
       }
-      .offcanvas-socials svg {
+      .mobile-socials svg {
         width: 22px;
         height: 22px;
         stroke: currentColor;
         stroke-width: 1.5;
         fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
       }
 
       /* =========================================
@@ -483,9 +487,10 @@
         );
         z-index: 2;
       }
+
       .hero-accent-line {
         position: absolute;
-        left: var(--container-padding);
+        left: 3%;
         top: 25%;
         width: 1px;
         background: linear-gradient(
@@ -500,12 +505,14 @@
         height: 0;
         opacity: 0;
       }
+
       .hero-content {
         position: relative;
         max-width: 650px;
-        padding-left: 3rem;
+        padding-left: 5rem;
         z-index: 4;
       }
+
       .hero-kicker {
         font-size: 0.8rem;
         text-transform: uppercase;
@@ -1202,12 +1209,11 @@
         position: relative;
         max-width: 1300px;
         margin: 0 auto;
-        padding-left: 5%;
       }
 
       .clinic-timeline {
         position: absolute;
-        left: 2.5%;
+        left: 5%;
         top: 0;
         bottom: 0;
         width: 1px;
@@ -1239,13 +1245,17 @@
         flex-direction: row-reverse;
       }
 
+      /* PERFECT STICKY PHYSICS */
       .scene-text {
         flex: 1;
+        position: -webkit-sticky;
         position: sticky;
         top: 35vh;
         max-width: 450px;
         z-index: 5;
+        align-self: flex-start;
       }
+
       .scene-step {
         font-size: 5rem;
         font-weight: 200;
@@ -1364,11 +1374,11 @@
         z-index: 2;
       }
 
+      /* FULL WIDTH VIDEO WITHOUT SCROLLBAR GLITCH */
       .clinic-video-feature {
         position: relative;
-        width: 100vw;
+        width: 100%;
         height: 100vh;
-        margin-left: calc(-50vw + 50%);
         background: #000;
         overflow: hidden;
       }
@@ -1377,7 +1387,9 @@
         height: 100%;
         object-fit: cover;
         opacity: 0.7;
+        transition: opacity 0.5s;
       }
+
       .video-overlay-content {
         position: absolute;
         top: 50%;
@@ -1387,6 +1399,7 @@
         z-index: 2;
         width: 100%;
         padding: 0 20px;
+        transition: opacity 0.5s;
       }
       .video-play-btn {
         width: 80px;
@@ -1413,13 +1426,14 @@
         height: 24px;
         fill: currentColor;
         margin-left: 4px;
+        stroke: none;
       }
 
       /* =========================================
            THE INSTITUTE (B2B COURSES) 
            ========================================= */
       .institute-section {
-        padding: 10rem var(--container-padding) 6rem var(--container-padding);
+        padding: 10rem 0 6rem 0;
         background-color: var(--bg-onyx);
         position: relative;
         border-top: 1px solid rgba(255, 255, 255, 0.05);
@@ -1429,6 +1443,7 @@
         text-align: center;
         max-width: 800px;
         margin: 0 auto 5rem auto;
+        padding: 0 var(--container-padding);
       }
       .inst-intro .scene-title {
         font-size: 3.5rem;
@@ -1438,7 +1453,7 @@
         display: flex;
         justify-content: center;
         gap: 6rem;
-        padding: 4rem 0;
+        padding: 4rem var(--container-padding);
         max-width: 1100px;
         margin: 0 auto 4rem auto;
         border-bottom: 1px solid rgba(255, 255, 255, 0.05);
@@ -1482,11 +1497,10 @@
         font-weight: 500;
       }
 
-      /* Fixed Hardware Accelerated Infinite Scroll */
+      /* Pure Full-Width Filmstrip */
       .filmstrip-wrapper {
-        width: 100vw;
+        width: 100%;
         position: relative;
-        margin-left: calc(-50vw + 50%);
         overflow: hidden;
         padding: 3rem 0;
         background: var(--bg-charcoal);
@@ -1500,8 +1514,7 @@
         animation: scrollFilmstrip 40s linear infinite;
         will-change: transform;
       }
-      /* Prevent hover pause on touch devices */
-      @media (hover: hover) {
+      @media (hover: hover) and (pointer: fine) {
         .filmstrip-track:hover {
           animation-play-state: paused;
           cursor: pointer;
@@ -1533,6 +1546,7 @@
       .curriculum-container {
         max-width: 1100px;
         margin: 8rem auto 0 auto;
+        padding: 0 var(--container-padding);
       }
       .curriculum-header {
         font-size: 2rem;
@@ -1607,7 +1621,7 @@
       .institute-global-cta {
         text-align: center;
         margin-top: 6rem;
-        padding-top: 6rem;
+        padding: 6rem var(--container-padding) 0 var(--container-padding);
         border-top: 1px solid rgba(255, 255, 255, 0.05);
         max-width: 800px;
         margin-inline: auto;
@@ -1633,7 +1647,7 @@
       }
 
       /* =========================================
-           LOCATION & CONTACT SECTION
+           LOCATION MAP SECTION
            ========================================= */
       .location-section {
         padding: 8rem var(--container-padding);
@@ -1764,7 +1778,6 @@
         font-weight: 300;
         transition: var(--transition-smooth);
       }
-      /* Fixed SVG Paths */
       .footer-social-link svg {
         width: 16px;
         height: 16px;
@@ -1798,6 +1811,36 @@
       }
 
       @media (max-width: 1024px) {
+        /* Mobile Nav Triggers & Logo Centering */
+        .luxury-nav {
+          justify-content: flex-end;
+        }
+        .nav-brand {
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+          margin-left: 0;
+          width: auto;
+          justify-content: center;
+        }
+        .nav-logo {
+          height: 95px;
+          max-width: 60vw;
+        }
+        .luxury-nav.scrolled .nav-logo {
+          height: 70px;
+        }
+
+        .nav-links-desktop {
+          display: none;
+        }
+        .nav-cta-wrapper {
+          display: none;
+        }
+        .hamburger {
+          display: flex;
+        }
+
         .showcase-grid {
           grid-template-columns: 1fr;
           gap: 4rem;
@@ -1805,15 +1848,14 @@
         .clinic-timeline {
           display: none;
         }
-        .clinic-journey-wrapper {
-          padding-left: 0;
-        }
         .clinic-scene,
         .clinic-scene.reverse {
           flex-direction: column;
           gap: 4rem;
           margin-bottom: 8rem;
         }
+
+        /* Mobile Sticky Adjustments */
         .scene-text {
           position: relative;
           top: 0;
@@ -1833,30 +1875,26 @@
           flex-direction: column;
           gap: 3rem;
         }
-
-        /* Nav specific mobile logic */
-        .nav-links {
-          display: none;
-        } /* Hide the absolute desktop links */
-        .nav-cta-wrapper {
-          display: none;
-        } /* Hide desktop cta button */
-        .hamburger {
-          display: flex;
-        } /* Show mobile button */
-
-        .nav-logo {
-          height: 70px;
-        }
-        .luxury-nav.scrolled .nav-logo {
-          height: 60px;
-        }
       }
 
       @media (max-width: 768px) {
-        /* Hide right side of top bar to fit on mobile */
-        .top-bar-right {
+        /* Mobile Top Bar Optimizations (Icons Only, Kept Visible) */
+        .top-bar-item span {
           display: none;
+        }
+        .social-links {
+          display: none;
+        }
+        .top-bar-left,
+        .top-bar-right {
+          gap: 1rem;
+        }
+        .top-bar-right {
+          display: flex;
+        }
+        .top-bar-item svg {
+          width: 20px;
+          height: 20px;
         }
 
         .hero-title {
@@ -1873,9 +1911,9 @@
           font-size: 2.5rem;
         }
 
-        /* Force Hero Image Behind Text so layout stays clean */
+        /* Force Hero Image Behind Text & Reset Padding */
         .hero-visual {
-          width: 100vw;
+          width: 100%;
           margin: 0;
           right: 0;
           left: 0;
@@ -1883,8 +1921,12 @@
           -webkit-mask-image: none;
           opacity: 0.4 !important;
         }
+        .hero-accent-line {
+          left: 5%;
+        }
         .hero-content {
-          padding-left: 0;
+          padding-left: 2rem;
+          margin-left: 3%;
         }
 
         .scene-visuals {
@@ -1943,7 +1985,7 @@
   <body>
     <div class="top-bar">
       <div class="top-bar-left">
-        <a href="#contact" class="top-bar-item">
+        <a href="#contact" class="top-bar-item" title="Location">
           <svg viewBox="0 0 24 24">
             <path
               d="M12 21c-4.418-6.136-7.5-10.377-7.5-13.5A7.5 7.5 0 0 1 12 3a7.5 7.5 0 0 1 7.5 4.5c0 3.123-3.082 7.364-7.5 13.5Z"
@@ -1954,7 +1996,7 @@
         </a>
       </div>
       <div class="top-bar-right">
-        <div class="lang-switcher top-bar-item">
+        <div class="lang-switcher top-bar-item" title="Language">
           <svg viewBox="0 0 24 24">
             <circle cx="12" cy="12" r="10" />
             <path
@@ -1998,7 +2040,7 @@
         /></a>
       </div>
 
-      <ul class="nav-links">
+      <ul class="nav-links-desktop">
         <li><a href="#expertise">Expertise</a></li>
         <li><a href="#dental-gallery">Gallery</a></li>
         <li><a href="#clinic">The Clinic</a></li>
@@ -2022,9 +2064,9 @@
     </nav>
 
     <div class="nav-overlay" id="nav-overlay"></div>
-    <div class="offcanvas-menu" id="offcanvas-menu">
-      <div class="offcanvas-header">
-        <img src="images-logo/1.png" alt="Logo" class="offcanvas-logo" />
+    <div class="mobile-menu" id="mobile-menu">
+      <div class="mobile-header">
+        <img src="images-logo/1.png" alt="Logo" class="mobile-logo" />
         <button class="close-btn" id="close-menu-btn" aria-label="Close Menu">
           <svg viewBox="0 0 24 24">
             <path
@@ -2037,30 +2079,30 @@
           </svg>
         </button>
       </div>
-      <ul class="offcanvas-links">
-        <li><a href="#expertise" class="offcanvas-link">Expertise</a></li>
-        <li>
-          <a href="#dental-gallery" class="offcanvas-link">The Lookbook</a>
-        </li>
-        <li><a href="#clinic" class="offcanvas-link">The Clinic</a></li>
-        <li><a href="#institute" class="offcanvas-link">The Institute</a></li>
-      </ul>
-      <div class="offcanvas-footer">
-        <a href="#contact" class="btn btn-emerald w-100">Book Consultation</a>
-        <div class="offcanvas-socials">
+      <div class="mobile-links">
+        <a href="#expertise" class="mobile-link">Expertise</a>
+        <a href="#dental-gallery" class="mobile-link">The Lookbook</a>
+        <a href="#clinic" class="mobile-link">The Clinic</a>
+        <a href="#institute" class="mobile-link">The Institute</a>
+      </div>
+      <div class="mobile-footer">
+        <a href="#contact" class="btn btn-emerald w-100" style="width: 100%"
+          >Book Consultation</a
+        >
+        <div class="mobile-socials">
           <a
             href="https://www.instagram.com/miskanderclinic?igsh=MWoza3ZoNHJqZXhjYw=="
             target="_blank"
             ><svg viewBox="0 0 24 24">
-              <rect width="16" height="16" x="4" y="4" rx="4" />
-              <circle cx="12" cy="12" r="3" />
-              <line x1="16.5" x2="16.5" y1="7.5" y2="7.5" /></svg
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg
           ></a>
           <a href="https://www.facebook.com/miskanderclinic" target="_blank"
             ><svg viewBox="0 0 24 24">
               <path
                 d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
-              /></svg
+              ></path></svg
           ></a>
         </div>
       </div>
@@ -2096,7 +2138,7 @@
           most discerning patients.
         </p>
         <div class="hero-actions">
-          <a href="#contact" class="btn btn-white">Schedule Assessment</a>
+          <a href="#contact" class="btn btn-emerald">Schedule Assessment</a>
         </div>
       </div>
     </header>
@@ -2119,7 +2161,14 @@
             <h3 class="doc-name">Dr. Abdullah Radwan</h3>
             <p class="doc-title">Consultant of Cosmetic Dentistry</p>
             <div class="hover-indicator">
-              <svg viewBox="0 0 24 24"><path d="M18 15l-6-6-6 6" /></svg>
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M18 15l-6-6-6 6"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  fill="none"
+                />
+              </svg>
             </div>
             <div class="doc-details">
               <div class="doc-details-inner">
@@ -2138,7 +2187,14 @@
             <h3 class="doc-name">Dr. Michael Iskander</h3>
             <p class="doc-title">Implantology & Periodontics</p>
             <div class="hover-indicator">
-              <svg viewBox="0 0 24 24"><path d="M18 15l-6-6-6 6" /></svg>
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M18 15l-6-6-6 6"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  fill="none"
+                />
+              </svg>
             </div>
             <div class="doc-details">
               <div class="doc-details-inner">
@@ -2156,7 +2212,14 @@
             <h3 class="doc-name">Dr. Dina Shahin</h3>
             <p class="doc-title">Prosthodontist</p>
             <div class="hover-indicator">
-              <svg viewBox="0 0 24 24"><path d="M18 15l-6-6-6 6" /></svg>
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M18 15l-6-6-6 6"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  fill="none"
+                />
+              </svg>
             </div>
             <div class="doc-details">
               <div class="doc-details-inner">
@@ -2175,7 +2238,14 @@
             <h3 class="doc-name">Dr. Aya Hamadto</h3>
             <p class="doc-title">Restorative Dentist</p>
             <div class="hover-indicator">
-              <svg viewBox="0 0 24 24"><path d="M18 15l-6-6-6 6" /></svg>
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M18 15l-6-6-6 6"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  fill="none"
+                />
+              </svg>
             </div>
             <div class="doc-details">
               <div class="doc-details-inner">
@@ -2194,7 +2264,14 @@
             <h3 class="doc-name">Dr. Morad Morres</h3>
             <p class="doc-title">Restorative Dentist</p>
             <div class="hover-indicator">
-              <svg viewBox="0 0 24 24"><path d="M18 15l-6-6-6 6" /></svg>
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M18 15l-6-6-6 6"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  fill="none"
+                />
+              </svg>
             </div>
             <div class="doc-details">
               <div class="doc-details-inner">
@@ -2230,14 +2307,23 @@
             <div class="slider-handle" id="slider-handle">
               <div class="slider-button">
                 <svg viewBox="0 0 24 24">
-                  <path d="M15 18l-6-6 6-6" />
-                  <path d="M9 18l6-6-6-6" />
+                  <path
+                    d="M15 18l-6-6 6-6"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    fill="none"
+                  />
+                  <path
+                    d="M9 18l6-6-6-6"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    fill="none"
+                  />
                 </svg>
               </div>
             </div>
             <div class="hover-cue-text">[ ← DRAG TO COMPARE → ]</div>
           </div>
-
           <div class="case-info-bar">
             <div class="case-header">
               <div>
@@ -2262,7 +2348,6 @@
             <img src="Images-Patients/8.webp" class="spotlight-after" />
             <div class="hover-cue-text">[ ⌕ HOVER TO EXPLORE ]</div>
           </div>
-
           <div class="case-info-bar">
             <div class="case-header">
               <div>
@@ -2286,7 +2371,6 @@
             <img src="Images-Patients/4.webp" class="dissolve-after" />
             <div class="hover-cue-text">[ ☼ HOVER TO REVEAL ]</div>
           </div>
-
           <div class="case-info-bar">
             <div class="case-header">
               <div>
@@ -2313,7 +2397,6 @@
               [ ⤢ HOVER TO EXPAND ]
             </div>
           </div>
-
           <div class="case-info-bar">
             <div class="case-header">
               <div>
@@ -2476,15 +2559,27 @@
 
       <div class="clinic-video-feature reveal-up">
         <video
+          id="clinic-video"
           autoplay
           loop
           muted
           playsinline
           src="images-clinic/10.mp4"
         ></video>
-        <div class="video-overlay-content">
-          <div class="video-play-btn">
-            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+        <div class="video-overlay-content" id="video-overlay">
+          <div
+            class="video-play-btn"
+            id="play-video-btn"
+            title="Watch Fullscreen"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="1.5"
+              fill="none"
+            >
+              <path d="M8 5v14l11-7z" fill="currentColor" />
+            </svg>
           </div>
           <h2 class="scene-title" style="margin-bottom: 0">
             Experience The Gallery.
@@ -2493,7 +2588,7 @@
       </div>
 
       <div class="global-cta-wrapper reveal-up delay-2" style="padding: 4rem 0">
-        <a href="#contact" class="btn btn-white">Experience it yourself</a>
+        <a href="#contact" class="btn btn-white">Book Your Experience</a>
       </div>
     </section>
 
@@ -2515,6 +2610,7 @@
         <h2
           class="scene-title reveal-cascade"
           style="
+            font-size: 3.5rem;
             font-weight: 300;
             line-height: 1.1;
             margin-bottom: 1.5rem;
@@ -2697,6 +2793,9 @@
         <div class="map-frame">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3454.6194724527527!2d31.461065975734268!3d30.01908101977174!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x145823ec5b4357a9%3A0x512fd2784a007beb!2sDr%20Michael%20Iskander%20Dental%20Clinics!5e0!3m2!1sen!2seg!4v1776991489511!5m2!1sen!2seg"
+            width="600"
+            height="450"
+            style="border: 0"
             allowfullscreen=""
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
@@ -2811,17 +2910,15 @@
 
         /* --- 1.b Mobile Hamburger Menu Logic --- */
         const hamburgerBtn = document.getElementById("mobile-menu-btn");
-        const navLinksMenu = document.getElementById("offcanvas-menu");
+        const mobileMenu = document.getElementById("mobile-menu");
         const navOverlay = document.getElementById("nav-overlay");
         const closeMenuBtn = document.getElementById("close-menu-btn");
-        const mobileLinks = navLinksMenu.querySelectorAll("a");
+        const mobileLinks = mobileMenu.querySelectorAll("a");
 
         function toggleMobileMenu() {
-          navLinksMenu.classList.toggle("active");
+          mobileMenu.classList.toggle("active");
           navOverlay.classList.toggle("active");
-          document.body.style.overflow = navLinksMenu.classList.contains(
-            "active"
-          )
+          document.body.style.overflow = mobileMenu.classList.contains("active")
             ? "hidden"
             : "";
         }
@@ -2834,7 +2931,7 @@
 
         mobileLinks.forEach((link) => {
           link.addEventListener("click", () => {
-            navLinksMenu.classList.remove("active");
+            mobileMenu.classList.remove("active");
             navOverlay.classList.remove("active");
             document.body.style.overflow = "";
           });
@@ -2987,6 +3084,52 @@
         );
 
         statNums.forEach((num) => statObserver.observe(num));
+
+        /* --- 9. Fullscreen Video Engine --- */
+        const clinicVideo = document.getElementById("clinic-video");
+        const playBtn = document.getElementById("play-video-btn");
+        const videoOverlay = document.getElementById("video-overlay");
+
+        if (clinicVideo && playBtn) {
+          playBtn.addEventListener("click", () => {
+            // Unmute and restart video for optimal viewing
+            clinicVideo.muted = false;
+            clinicVideo.currentTime = 0;
+            clinicVideo.play();
+
+            // Hide the overlay text/button during fullscreen
+            videoOverlay.style.opacity = "0";
+
+            // Trigger Fullscreen cross-browser
+            if (clinicVideo.requestFullscreen) {
+              clinicVideo.requestFullscreen();
+            } else if (clinicVideo.webkitRequestFullscreen) {
+              /* Safari */
+              clinicVideo.webkitRequestFullscreen();
+            } else if (clinicVideo.msRequestFullscreen) {
+              /* IE11 */
+              clinicVideo.msRequestFullscreen();
+            }
+          });
+
+          // Listen for exiting fullscreen to mute and bring back overlay
+          document.addEventListener("fullscreenchange", exitHandler);
+          document.addEventListener("webkitfullscreenchange", exitHandler);
+          document.addEventListener("mozfullscreenchange", exitHandler);
+          document.addEventListener("MSFullscreenChange", exitHandler);
+
+          function exitHandler() {
+            if (
+              !document.fullscreenElement &&
+              !document.webkitIsFullScreen &&
+              !document.mozFullScreen &&
+              !document.msFullscreenElement
+            ) {
+              clinicVideo.muted = true;
+              videoOverlay.style.opacity = "1";
+            }
+          }
+        }
       });
     </script>
   </body>
